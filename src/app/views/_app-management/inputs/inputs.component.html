@@ -1,0 +1,48 @@
+<div>
+  <app-navigation></app-navigation>
+  <app-app-dashboard-navigation></app-app-dashboard-navigation>
+
+  <div class="dash-section m-5 p-3 bg-white">
+    <div class="m-4">
+      <div class="col font-weight-bold text-black-50 ">
+        Inputs
+      </div>
+      <div class="col" (click)="showFilter = !showFilter">
+        <button class="btn float-right btn-md text-white px-3 filter-orange-bg mt-n4" id="toggleMessage">
+          <span *ngIf="!showFilter">Show filter<i class="fas fa-chevron-down"></i></span>
+          <span *ngIf="showFilter">Hide filter<i class="fas fa-chevron-up"></i></span>
+        </button>
+      </div>
+    </div>
+    <hr />
+    <div class="row m-4" *ngIf="showFilter">
+      <div class="col-3 font-weight-bold">
+        Choose Input<br />
+        <select class="w-100">
+          <option>All</option>
+        </select>
+      </div>
+
+      <div class="col-4 font-weight-bold">
+        Choose Category<br />
+        <select class="w-100">
+          <option>All</option>
+        </select>
+      </div>
+
+      <div class="col-3 font-weight-bold">
+        Choose Supplier<br />
+        <select class="w-100">
+          <option>All</option>
+        </select>
+      </div>
+
+      <div class="col-2 font-weight-bold">
+        <button class="btn btn-md px-5 my-3 float-right filter-teal-bg text-white">
+          Apply
+        </button>
+      </div>
+    </div>
+  </div>
+  <app-input-list></app-input-list>
+</div>

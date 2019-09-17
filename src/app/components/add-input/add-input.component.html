@@ -1,0 +1,123 @@
+<div class="modal-content modal-contents" *ngIf="!success">
+  <div class="modal-header change-modal-header">
+    <h5 class="modal-title text-teal">Add New Input</h5>
+    <button type="button" class="close" data-dismiss="modal">
+      &times;
+    </button>
+  </div>
+  <form (submit)="createInput(createInputForm.value)" #createInputForm="ngForm" class="px-2 py-2" id="inputForm">
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <label>Name of Input</label>
+          <input type="text" class="form-control" name="name" ngModel #name="ngModel" required minlength="3"
+            pattern="^([a-zA-Z\s\-\(\)]*)$" />
+          <div *ngIf="name.touched && !name.valid" class="error_message">
+            <span *ngIf="name.errors.minlength" class="text-danger">Name must not be under 3 characters.</span>
+            <span *ngIf="name.errors.required" class="text-danger">Please enter input name.</span>
+            <span *ngIf="name.errors.pattern" class="text-danger">Only alphabetic characters are allowed.</span>
+          </div>
+        </div>
+        <div class="form-group col-md-12">
+          <label>Crops</label>
+          <input type="text" class="form-control" name="crops" ngModel #crops="ngModel" required
+            pattern="^([a-zA-Z,\s\-\(\)]*)$" />
+          <div *ngIf="crops.touched && !crops.valid" class="error_message">
+            <span class="text-danger" *ngIf="crops.errors.required">
+              Please enter crops.
+            </span>
+            <span *ngIf="crops.errors.pattern" class="text-danger">Only alphabetic characters separated with a comma are
+              allowed.</span>
+          </div>
+        </div>
+        <div class="form-group col-md-12">
+          <label>Input Category</label>
+          <select id="category" class="form-control col-md-12" name="category" ngModel #category="ngModel">
+            <option>Herbicide</option>
+            <option>Pesticide</option>
+            <option>Seeds</option>
+            <option>Fertilizer</option>
+            <option>Farming Tool</option>
+          </select>
+          <div *ngIf="category.touched && !category.valid" class="error_message">
+            <span *ngIf="category.errors.required" class="text-danger">
+              Please select category.
+            </span>
+          </div>
+        </div>
+        <div class="form-group col-md-12">
+          <label>Description</label>
+          <input type="text" class="form-control" name="description" required ngModel #description="ngModel"
+            minlength="3" />
+          <div *ngIf="description.touched && !description.valid" class="error_message">
+            <span *ngIf="description.errors.required" class="text-danger">
+              Description must not be under three characters.
+            </span>
+          </div>
+        </div>
+        <div class="form-group col-md-12">
+          <label>Image</label>
+          <input type="file" class="form-control" name="photo" (change)="changeImage($event)" accept="image/*" />
+        </div>
+        <div class="form-group col-md-12">
+          <label>Unit price</label>
+          <input type="text" class="form-control" name="price" ngModel #price="ngModel" required
+            pattern="^([0-9,\s\-\(\)]*)$" />
+          <div *ngIf="price.touched && !price.valid" class="error_message">
+            <span *ngIf="price.errors.required">
+              Please enter unit price.
+            </span>
+            <span *ngIf="price.errors.pattern" class="text-danger">Only digits are allowed.</span>
+          </div>
+        </div>
+        <div class="form-group col-md-12">
+          <label>Units</label>
+          <input type="text" class="form-control" name="unit" ngModel #unit="ngModel" required
+            pattern="^([a-zA-Z,\s\-\(\)]*)$" />
+          <div *ngIf="unit.touched && !unit.valid" class="error_message">
+            <span *ngIf="unit.errors.required" class="text-danger">
+              Please enter units.
+            </span>
+            <span *ngIf="unit.errors.pattern" class="text-danger">Only alpha numeric characters separated with a comma
+              are
+              allowed.</span>
+          </div>
+        </div>
+        <div class="form-group col-md-12">
+          <label>Supplier</label>
+          <input type="text" class="form-control" name="supplier" ngModel #supplier="ngModel" required
+            pattern="^([a-zA-Z\s\-\(\)]*)$" />
+          <div *ngIf="supplier.touched && !supplier.valid" class="error_message">
+            <span *ngIf="supplier.errors.required" class="text-danger">
+              Please enter supplier name.
+            </span>
+            <span *ngIf="supplier.errors.pattern" class="text-danger">Only alphabetic characters are allowed.</span>
+          </div>
+        </div>
+        <div class="form-group col-md-12">
+          <label>Quantity Available</label>
+          <input type="text" class="form-control" name="quantity" ngModel #quantity="ngModel" required
+            pattern="^([0-9\s\-\(\)]*)$" />
+          <div *ngIf="quantity.touched && !quantity.valid" class="error_message">
+            <span *ngIf="quantity.errors.required" class="text-danger">
+              Please enter quantity.
+            </span>
+            <span *ngIf="quantity.errors.pattern" class="text-danger">Only digits are allowed.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="error_message" *ngIf="db_errors">
+      <span class="text-danger">{{ db_errors }}</span>
+    </div>
+    <div class="d-flex justify-content-center align-item-center form-group">
+      <button type="submit" class="submit-input-btn" [disabled]="!createInputForm.form.valid">
+        <span *ngIf="loading" class="spinner-border spinner-border-md text-white" role="status"></span>
+        <span *ngIf="loading" class="mx-2">Loading...</span>
+        <span *ngIf="!loading">
+          Save Info
+        </span>
+      </button>
+    </div>
+  </form>
+</div>

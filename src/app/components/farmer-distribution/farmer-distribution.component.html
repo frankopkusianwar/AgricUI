@@ -1,0 +1,14 @@
+<div *ngIf="dataLoaded" class="boxChart__container">
+	<div>
+		<highcharts-chart
+			id="container" 
+			[Highcharts]="Highcharts"
+			[constructorType]="chartConstructor"
+			[options]="chartOptions"
+			[callbackFunction]="chartCallback"
+			[(update)]=updateFromInput
+			[oneToOne]="true"
+		 	class="map-style">
+		</highcharts-chart>
+	</div>
+</div>

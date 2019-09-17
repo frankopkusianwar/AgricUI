@@ -1,0 +1,305 @@
+<div class="container-fluid main">
+  <app-navigation></app-navigation>
+  <div class="row">
+    <div class="row table_title mt-5 background-white w-100">
+      <div class="row w-100 p-3 mx-5">
+        <div class="col mx-5 px-5 title">
+          <h3 class="my-4 ml-5">{{ title }}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col background-white">
+      <div
+        *ngIf="success"
+        class="alert alert-success alert-dismissible fade show px-auto w-75 m-auto"
+        role="alert"
+      >
+        <strong>Registration successful!</strong> You should check your mail for
+        your password
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div
+        *ngIf="db_errors"
+        class="alert alert-danger alert-dismissible fade show px-auto m-auto error_message w-75"
+        role="alert"
+      >
+        <div class="" *ngFor="let error of db_errors | keyvalue">
+          <span class="error_message ">{{ error.value }}</span>
+        </div>
+      </div>
+      <form
+        [formGroup]="Form"
+        (ngSubmit)="handleSubmit(Form.value)"
+        class="px-auto  py-2 w-75 m-auto"
+      >
+        <div class="form-group">
+          <label for="value_chain" class="text_bold"
+            >Select Account Types</label
+          >
+
+          <select
+            class="custom-select form-control form-control-lg"
+            id="value_chain"
+            (keyup)="clearMessage()"
+            formControlName="account_type"
+          >
+            <option>Select Account Type</option>
+            <option value="Custom">Custom</option>
+            <option value="Generic">Generic</option>
+            <option value="Test">Test</option>
+          </select>
+          <div
+            *ngIf="submitted && Form.controls.value_chain.errors"
+            class="error_message"
+          >
+            <span *ngIf="Form.controls.value_chain.errors.required">
+              Please select an account type.
+            </span>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              id="account_name"
+              placeholder="Enter Account Name"
+              formControlName="account_name"
+              (keyup)="clearMessage()"
+              pattern="^([a-zA-Z0-9\s\-\(\)]*)$"
+            />
+            <div
+              *ngIf="submitted && Form.controls.account_name.errors"
+              class="error_message"
+            >
+              <span *ngIf="Form.controls.account_name.errors.required">
+                Please enter account name.
+              </span>
+              <span *ngIf="Form.controls.account_name.errors.pattern">
+                Please enter a valid name.<br />
+                Only alphabetic and numeric characters are allowed.
+              </span>
+            </div>
+          </div>
+          <div class="form-group col-md-6">
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              id="username"
+              placeholder="Enter Username"
+              formControlName="username"
+              (keyup)="clearMessage()"
+              pattern="^([a-zA-Z0-9\s\-\(\)]*)$"
+            />
+            <div
+              *ngIf="submitted && Form.controls.username.errors"
+              class="error_message"
+            >
+              <span *ngIf="Form.controls.username.errors.required">
+                Please enter your username.
+              </span>
+              <span *ngIf="Form.controls.username.errors.pattern">
+                Please enter a valid username.<br />
+                Only alphabetic characters are allowed.
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            id="address"
+            placeholder="Enter Address"
+            formControlName="address"
+            (keyup)="clearMessage()"
+            pattern="^([a-zA-Z0-9\s\-\,\(\)]*)$"
+          />
+          <div
+            *ngIf="submitted && Form.controls.address.errors"
+            class="error_message"
+          >
+            <span *ngIf="Form.controls.address.errors.required">
+              Please enter your address.
+            </span>
+            <span *ngIf="Form.controls.address.errors.pattern">
+              Please enter a valid address. Address can be alphanumeric and can
+              only be separated with "-" and ",".
+            </span>
+          </div>
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            id="contact_person"
+            placeholder="Enter Contact Person"
+            formControlName="contact_person"
+            (keyup)="clearMessage()"
+            pattern="^([a-zA-Z\s\-\(\)]*)$"
+          />
+          <div
+            *ngIf="submitted && Form.controls.contact_person.errors"
+            class="error_message"
+          >
+            <span *ngIf="Form.controls.contact_person.errors.required">
+              Please enter the name of your contact person.
+            </span>
+            <span *ngIf="Form.controls.contact_person.errors.pattern">
+              Please enter a valid name. Only alphabetic characters are allowed.
+            </span>
+          </div>
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            id="phone_number"
+            placeholder="Enter Phonenumber"
+            formControlName="phone_number"
+            (keyup)="clearMessage()"
+            pattern="^([0-9\s\-\+\(\)]*)$"
+            maxlength="17"
+          />
+          <div
+            *ngIf="submitted && Form.controls.phone_number.errors"
+            class="error_message"
+          >
+            <span *ngIf="Form.controls.phone_number.errors.required">
+              Please enter your phone number.
+            </span>
+            <span *ngIf="Form.controls.phone_number.errors.pattern">
+              Please enter a valid phone number (it should be between 11 -17
+              digits)
+            </span>
+            <span *ngIf="Form.controls.phone_number.errors.maxlength">
+              Phone number must not be greater than 17 digits.
+            </span>
+            <span *ngIf="Form.controls.phone_number.errors.minlength">
+              Phone number must be at least 11 digits.
+            </span>
+          </div>
+        </div>
+        <div class="form-group">
+          <input
+            type="email"
+            class="form-control form-control-lg"
+            id="email"
+            placeholder="Enter Email"
+            formControlName="email"
+            (keyup)="clearMessage()"
+          />
+          <div
+            *ngIf="submitted && Form.controls.email.errors"
+            class="error_message"
+          >
+            <span *ngIf="Form.controls.email.errors.required">
+              Please enter your email address.
+            </span>
+            <span *ngIf="Form.controls.email.errors.email">
+              Email must be a valid email address.
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="district" class="text_bold">Select District</label>
+          <select
+            class="form-control form-control-lg district"
+            id="district"
+            (keyup)="clearMessage()"
+            formControlName="district"
+          >
+            <option>Select District</option>
+            <option
+              *ngFor="let district of district"
+              value="{{ district }}"
+              class="district"
+              >{{ district }}</option
+            >
+          </select>
+          <div
+            *ngIf="submitted && Form.controls.district.errors"
+            class="error_message"
+          >
+            <span *ngIf="Form.controls.district.errors.required">
+              Please select a district.
+            </span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="value_chain" class="text_bold">Select Value Chain</label>
+
+          <select
+            class="form-control form-control-lg"
+            id="value_chain"
+            (keyup)="clearMessage()"
+            formControlName="value_chain"
+          >
+            <option>Select Value Chain</option>
+            <option value="Crop">Crop</option>
+            <option value="Dairy">Dairy</option>
+            <option value="N/A">N/A</option>
+          </select>
+          <div
+            *ngIf="submitted && Form.controls.value_chain.errors"
+            class="error_message"
+          >
+            <span *ngIf="Form.controls.value_chain.errors.required">
+              Please select a value chain.
+            </span>
+          </div>
+        </div>
+        <div class="form-group" style="display:flex; flex-direction: row">
+          <button
+            type="button"
+            class="btn btn-primary w-50 mr-3 password_btn"
+            (click)="generatePassword()"
+            id="password_btn"
+          >
+            Click to generate password
+          </button>
+          <input
+            type="text"
+            class="form-control form-control-lg "
+            id="password"
+            name="password"
+            value="{{ password }}"
+            formControlName="password"
+            (keyup)="clearMessage()"
+          />
+          <div></div>
+          <div
+            *ngIf="submitted && Form.controls.password.errors"
+            class="error_message"
+          >
+            <span *ngIf="Form.controls.password.errors.required">
+              Please click to generate password.
+            </span>
+          </div>
+        </div>
+        <button class="btn btn-primary btn-lg w-100 mr-3 my-5">
+          <span
+            *ngIf="loading"
+            class="spinner-border spinner-border-md text-white"
+            role="status"
+          ></span>
+          <span *ngIf="loading" class="mx-2">Loading...</span>
+          <span *ngIf="!loading">
+            Create ACCOUNT
+          </span>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

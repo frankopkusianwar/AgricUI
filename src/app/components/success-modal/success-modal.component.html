@@ -1,0 +1,24 @@
+<div class="modal-dialog change-success-dialog">
+  <div class="modal-content">
+    <div class="modal-body">
+      <div class="success-description">
+        <div class="success-icon">
+          <img src="../../../assets/icons/successIcon.svg" alt="success icon" />
+        </div>
+        <div class="success-intro">
+          <div class="font-weight-bold mt-3 mb-3">Success!</div>
+          <p>{{ message }}</p>
+          <button
+            type="button"
+            class="accept-btn"
+            data-dismiss="modal"
+            aria-label="Close"
+            (click) = "clear()"
+          >
+            Ok
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

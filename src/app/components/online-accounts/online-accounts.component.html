@@ -1,0 +1,98 @@
+<div class="col top-districts">
+  <div class="row px-3">
+    <div class="col-md-6 mt-3 p-0">    
+      <div class="stat-section p-5">
+          <h4>Number and online status of accounts</h4>
+          <table class="table table-striped text-center">
+            <thead class="thead-agric text-white">
+              <tr>
+                <th scope="col">Account Type</th>
+                <th scope="col">Number of accounts online</th>
+                <th scope="col">Online duration</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Insurance</td>
+                <td>
+                  <div class="online-accounts">
+                    <div class="status online"></div>
+                    <div>2 online</div>
+                  </div>
+                </td>
+                <td>3 hours 6 min</td>
+              </tr>
+              <tr>
+                <td>Master Agent</td>
+                <td>
+                  <div class="online-accounts">
+                    <div class="status online"></div>
+                    <div>2 online</div>
+                  </div>
+                </td>
+                <td>3 hours 6 min</td>
+              </tr>
+              <tr>
+                <td>Development Partners</td>
+                <td>
+                  <div class="online-accounts">
+                    <div class="status offline"></div>
+                    <div>0 online</div>
+                  </div>
+                </td>
+                <td>3 hours 6 min</td>
+              </tr>
+              <tr>
+                <td>Government</td>
+                <td>
+                  <div class="online-accounts">
+                    <div class="status online"></div>
+                    <div>2 online</div>
+                  </div>
+                </td>
+                <td>3 hours 6 min</td>
+              </tr>
+              <tr>
+                <td>Off-takers</td>
+                <td>
+                  <div class="online-accounts">
+                    <div class="status online"></div>
+                    <div>2 online</div>
+                  </div>
+                </td>
+                <td>3 hours 6 min</td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    </div>
+    <div class="col-md-6 mt-3 p-0 pl-3">
+      <div class="stat-section p-5">
+          <h4>Top performing Village Agents</h4>
+          <table class="table table-striped text-center">
+            <thead class="thead-agric text-white">
+              <tr>
+                <th scope="col">Name of village Agents</th>
+                <th scope="col">Number of Farmers/Orders</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="topPerformingVillageAgents.data.length > 0; else noDataDiv">
+              <tr *ngFor="let topPerformingVA of topPerformingVillageAgents.data">
+                <td>{{ topPerformingVA.name }}</td>
+                <td class="font-weight-bold">{{ topPerformingVA.farmerCount }} | {{ topPerformingVA.orderCount }}</td>
+              </tr>
+            </tbody>
+            <ng-template #noDataDiv>
+              <tbody>
+                <tr>
+                  <td colspan="2">
+                    <h5 class="text-center">No village agent data to display at the moment.</h5>
+                  </td>
+                </tr>
+              </tbody>
+            </ng-template>
+          </table>
+      </div>
+    </div>
+  </div>
+</div>

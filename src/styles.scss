@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+$body-bg: #ebedf3;
+$default-grey: #d3d3d4c7;
+$default-button-color: #0670d4c7;
+$default-red: #c92d2a;
+$default-green: #42a948;
+$default-orange: #f38937;
+$filter-teal: #218a92;
+$filter-teal-lighter: rgb(89, 170, 233);
+
+$nav-background: rgb(112, 185, 241);
+$nav-background-white: #fff;
+$nav-background-color: #1f4788;
+$link-grey: rgb(121, 123, 126);
+
+html,
+body {
+  margin: 0px;
+  padding: 0px;
+  background: $body-bg !important;
+  font-family: 'Montserrat' !important;
+}
+
+ol { padding-left: 0.8em; }
+
+$black-tp: rgba(0, 0, 0, 0.5);
+$landing-color: rgb(119, 184, 232);
+
+.app-landing-container {
+  text-align: center;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(to right, $black-tp, $black-tp),
+    url('./assets/images/home-image.jpg');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: left;
+  font-weight: 500;
+  line-height: 30px;
+  min-height: 100vh;
+
+  div.m-auto,
+  .m-auto div {
+    width: 70%;
+  }
+
+  p {
+    font-size: 1.5em;
+    margin: 30px 0px;
+  }
+
+  h1 {
+    padding-top: 180px;
+    font-size: 4em;
+  }
+  div {
+    padding-bottom: 80px;
+  }
+
+  .landing-link {
+    cursor: pointer;
+    padding: 10px;
+  }
+
+  a.landing-link {
+    background-color: $landing-color;
+    border: 1px solid $landing-color;
+  }
+
+  .landing-video {
+    width: 100%;
+    height: 540px;
+    padding: 10px;
+  }
+
+  .text-black {
+    color: black;
+  }
+  .no-outline {
+    outline: none;
+  }
+
+  .about-ezy {
+    line-height: 2.5rem;
+    font-size: 30px !important;
+    color: $default-grey;
+  }
+}
+
+@media (max-width: 667.98px) {
+  .app-landing-container {
+    div {
+      width: 100%;
+    }
+
+    .m-auto {
+      padding: 10px;
+      h1 {
+        padding-top: 180px;
+        font-size: 3em;
+      }
+      p {
+        font-size: 1em;
+      }
+    }
+  }
+}
+
+button.login-btn {
+  background: transparent;
+  border: 1.8px solid $default-button-color;
+  width: 54%;
+  color: $default-button-color;
+  font-size: 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+}
+button.login-btn:hover {
+  background-color: $default-button-color;
+  color: white;
+  border: none;
+}
+
+.ng-valid[required],
+.ng-valid.required {
+  border-left: 5px solid $default-green !important;
+}
+
+.ng-invalid:not(form) {
+  border-left: 5px solid $default-red !important;
+}
+.bg-orange {
+  background: $default-orange !important;
+  color: $default-grey !important;
+}
+.bg-gray {
+  background: $default-grey !important;
+}
+.text-gray {
+  color: $link-grey !important;
+}
+.padding-20 {
+  padding: 20px !important;
+}
+.bold {
+  font-weight: 700;
+}
+.no-underline {
+  text-decoration: none !important;
+}
+.nav-under {
+  background: $nav-background-white !important;
+
+  div {
+    display: inline-block;
+    padding: 10px 50px 10px 0;
+
+    a {
+      color: $link-grey;
+    }
+  }
+}
+a.active {
+  color: $nav-background !important;
+}
+
+.dash-section {
+  background: $nav-background-white;
+
+  .filter-orange-bg {
+    background: $default-orange;
+  }
+  .filter-teal-bg {
+    background: $filter-teal;
+  }
+  .action {
+    width: 30px;
+  }
+  .action i {
+    font-size: 20px;
+  }
+}
+.bg-navy {
+  background-color: $nav-background-color !important;
+  color: $nav-background-white !important;
+}
+
+.table_col {
+  height: 100vh;
+}
+.table_head {
+  background-color: $filter-teal-lighter;
+  color: white;
+}
+a {
+  cursor: pointer !important;
+}
+.filter-panel {
+  padding-bottom: 10px;
+}
+.buttons {
+  padding-right: 2%;
+  padding-top: 2.7%;
+}
+.apply, .clear {
+  width: 80px;
+  margin: 0 2px 5px 2px;
+}
+.apply:hover, .clear:hover {
+  opacity: 0.8;
+}
+.apply:active, .clear:active {
+  opacity: 1;
+}
+.date-field {
+  padding-left: 1.8%;
+}

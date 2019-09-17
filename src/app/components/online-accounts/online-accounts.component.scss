@@ -1,0 +1,38 @@
+$white: #fff;
+$agric: #77b8e9;
+$online: #0ffc06;
+$offline: #fc050f;
+.stat-section {
+  background-color: $white;
+  border-radius: 5px;
+  height: 100%;
+  min-height: 20rem;
+}
+
+.thead-agric {
+  background-color: $agric;
+}
+
+.top-districts {
+  font-size: 0.7rem;
+}
+
+.online-accounts {
+  display: flex;
+  justify-content: center;
+}
+
+.status {
+  height: 1rem;
+  width: 1rem;
+  border-radius: 50%;
+  margin: 0 1rem;
+}
+
+.online {
+  background-color: $online;
+}
+
+.offline {
+  background-color: $offline;
+}

@@ -1,0 +1,43 @@
+$filter-orange: #f38938;
+$white: #ffff;
+$filter-teal: #218a92;
+$nav-background: #77B8E9;
+$nav-background-color: #1f4788;
+.dashboard_background {
+  margin: 0px;
+  padding: 0px;
+}
+.text-background {
+  color: $nav-background-color;
+}
+.dash-section {
+  background: $white;
+
+  .filter-orange-bg {
+    background: $filter-orange;
+  }
+  .filter-teal-bg {
+    background: $filter-teal;
+  }
+}
+
+.report-cards {
+  .bg-white {
+    background: $white;
+  }
+
+  .small-card {
+    height: 150px;
+    border-radius: 10px 10px 10px 10px;
+  }
+  .nav-background {
+    background: $nav-background;
+  }
+}
+
+.pie-chart-report {
+  .pie-card {
+    height: 450px;
+    border-radius: 10px 10px 10px 10px;
+  }
+}

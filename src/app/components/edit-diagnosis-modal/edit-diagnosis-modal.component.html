@@ -1,0 +1,166 @@
+Edit / Create new Diagnosis Information
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div 
+        class="modal-header no-border"
+        *ngIf="!message"
+      >
+        <h5 class="modal-title text-color" id="exampleModalCenterTitle">{{ action }} {{ category | titlecase }} Info</h5>
+        <button 
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="closeEditDiagnosisModal()"
+        >
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="col">
+          <form
+            [formGroup]="diagnosisInformationForm"
+            *ngIf="!loading; else formSpinner"
+          >
+            <div *ngIf="!message">
+              <div class="form-group">
+                <label for="diagnosisName">{{ category | titlecase }} Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="diagnosisName"
+                  aria-describedby="nameHelp"
+                  value="{{ diagnosisInformation.name }}"
+                  formControlName="name"
+                >
+                <small
+                  *ngIf="name.invalid"
+                  class="form-text text-danger"
+                >
+                  Name is required
+                </small>
+              </div>
+              <div class="form-group">
+                <label for="diagnosisCause">Cause</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="diagnosisCause"
+                  value="{{ diagnosisInformation.cause }}"
+                  formControlName="cause"
+                >
+                <small
+                  *ngIf="cause.invalid"
+                  class="form-text text-danger"
+                >
+                  Cause is required
+                </small>
+              </div>
+              <div class="form-group">
+                <label for="diagnosisCrop">Crop</label>
+                <select
+                  class="form-control"
+                  id="diagnosisCrop"
+                  formControlName="crop"
+                  *ngIf="crops"
+                >
+                  <option 
+                    [value]="crop.name"
+                    *ngFor="let crop of crops.data"
+                  >{{ crop.name }}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="control">Prevention and Control</label>
+                <quill-editor
+                  formControlName="control"
+                  [modules]="quillConfig"
+                >
+                </quill-editor>
+              </div>
+              <div class="form-group">
+                <label for="diagnosisImage">Image</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  id="diagnosisImage"
+                  formControlName="photo"
+                  (change)="processPhoto($event)"
+                >
+                <small id="imageHelp" class="form-text text-muted">jpeg, jpg and png images under 2MB allowed.</small>
+              </div>
+              <div class="form-group">
+                <label for="diagnosisEffects">Effects</label>
+                <quill-editor
+                  formControlName="explanation"
+                  [modules]="quillConfig"
+                >
+                </quill-editor>
+              </div>
+            </div>
+            <div *ngIf="message">
+              <div class="text-center mb-2">
+                <i class="far fa-check-circle text-color h3"></i>
+                <div class="mb-3"><h5>{{ status | titlecase }} !</h5></div>
+                <div>{{ message }}</div>
+              </div>
+            </div>
+            <div class="modal-footer no-border">
+              <div *ngIf="!message">
+                <button 
+                  type="button" 
+                  class="btn button-color text-white"
+                  (click)="onSubmit()"
+                  [disabled]="editDiagnosticInformationLoading"
+                >
+                  <div class="d-flex align-items-center">
+                    <div 
+                      class="spinner mr-1"
+                      *ngIf="editDiagnosticInformationLoading"
+                    >
+                      <span
+                        class="spinner-border spinner-border-md text-white"
+                        role="status"
+                      ></span>
+                    </div>
+                    <div>
+                      {{ action }} Info
+                    </div>
+                  </div>
+                </button>
+                <button 
+                  type="button" 
+                  class="btn btn-secondary ml-3" 
+                  data-dismiss="modal"
+                  (click)="closeEditDiagnosisModal()"
+                  [disabled]="editDiagnosticInformationLoading"
+                >
+                  Close
+                </button>
+              </div>
+              <div *ngIf="message">
+                <button 
+                  type="button" 
+                  class="btn button-color text-white"
+                  (click)="closeEditDiagnosisModal()"
+                  data-dismiss="modal"
+                >
+                  Ok
+                </button>
+              </div>
+            </div>
+          </form>
+          <ng-template #formSpinner>
+            <div class="spinner d-flex">
+              <span
+                class="spinner-border spinner-border-md mx-auto"
+                role="status"
+              ></span>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

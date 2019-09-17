@@ -1,0 +1,164 @@
+<div class="dash-section m-5 bg-white">
+  <div class="m-4">&nbsp;</div>
+  <div class="m-4 row">
+    <div class="col">
+      <span class="float-left">
+        &nbsp; &nbsp; &nbsp; &nbsp;List of Available Inputs
+      </span>
+    </div>
+    <div class="col">
+      <button
+        class="float-right btn bg-primary text-white mx-3"
+        data-toggle="modal"
+        data-target="#inputModal"
+        (click)="prepareToAddInput()"
+      >
+        <i class="fas fa-plus mr-2"></i>Add Input
+      </button>
+    </div>
+  </div>
+  <div class="m-4">&nbsp;</div>
+  <div class="alert alert-danger" *ngIf="errors">{{ errors }}</div>
+  <table class="table table-striped ">
+    <thead w-100 class="table_head">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Input Name</th>
+        <th scope="col">Image</th>
+        <th scope="col">Crop</th>
+        <th scope="col">Category</th>
+        <th scope="col">Unit Price</th>
+        <th scope="col">Unit Price(Ugx)</th>
+        <th scope="col">Qty Available</th>
+        <th scope="col">Supplier</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody p-5 *ngIf="inputs">
+      <tr
+        *ngFor="
+          let row of inputs.result
+            | paginate: { itemsPerPage: count, currentPage: page };
+          let i = index
+        "
+      >
+        <td>{{ (page - 1) * count + i + 1 }}</td>
+        <td>{{ row.name }}</td>
+        <td>
+          <img
+            *ngIf="row.photo_url"
+            src="{{ row.photo_url }}"
+            width="60"
+            height="60"
+            alt=""
+          />
+          {{ !row.photo_url || row.photo_url.length === 0 ? "N/A" : "" }}
+        </td>
+        <td>{{ row.crops }}</td>
+        <td>{{ row.category }}</td>
+        <td>{{ row.unit }}</td>
+        <td>{{ row.price }}</td>
+        <td>{{ row.quantity }}</td>
+        <td>{{ row.supplier }}</td>
+
+        <td>
+          <div class="dropdown">
+            <button
+              class="btn btn-outline-info dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              ACTION
+            </button>
+            <div
+              class="dropdown-menu options"
+              aria-labelledby="dropdownMenuButton"
+            >
+              <a
+                class="dropdown-item suspend"
+                data-toggle="modal"
+                data-target="#inputModal"
+                (click)="viewInput(row._id)"
+                >Edit</a
+              >
+              <a
+                class="dropdown-item activate"
+                data-toggle="modal"
+                data-target="#inputModal"
+                (click)="prepareToDeleteInput(row._id, row.name)"
+                >Delete</a
+              >
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="spinner d-flex" *ngIf="loading">
+    <span class="spinner-border spinner-border-md mx-auto update-loading" role="status"></span>
+  </div>
+  <div class="m-4">&nbsp;</div>
+</div>
+<!-- Delete Input -->
+<div class="modal fade" id="inputModal">
+  <div class="modal-dialog change-modal-dialog" role="document">
+    <div class="modal-content" *ngIf="openDeleteModal">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Input</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete {{ Inputname }}
+      </div>
+      <div class="modal-footer">
+        <span class="text-danger" *ngIf="errors">{{ errors }}</span>
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="deleteInput(InputId)"
+        >
+          <span
+            *ngIf="loading"
+            class="spinner-border spinner-border-md text-white
+              update-loading"
+            role="status"
+          ></span>
+          Delete Input
+        </button>
+        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+    <!-- Modal -->
+    <app-add-input
+      *ngIf="openAddModal"
+      (successEvent)="reloadInput()"
+      (successMessage)="getMessage($event)"
+    >
+    </app-add-input>
+    <app-edit-input
+      [InputId]="InputId"
+      *ngIf="InputId && openEditModal"
+      (successEvent)="reloadInput()"
+      (successMessage)="getMessage($event)"
+    >
+    </app-edit-input>
+    <app-success-modal
+      *ngIf="openSuccessModal && message"
+      [message]="message"
+      (clearInputEvent)="clearInputId()"
+    >
+    </app-success-modal>
+  </div>
+</div>

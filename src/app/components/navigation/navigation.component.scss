@@ -1,0 +1,167 @@
+$nav-background: #77b8e9;
+$white: #fff;
+$red: #f00;
+$link-grey: #666;
+$light-gray: #eee;
+$filter-orange: #f38938;
+$filter-teal: #218a92;
+$text-teal: #3e9dc1;
+$text-green: #81cb93;
+$text-red: #f00;
+$text-orange: #d8a073;
+
+nav {
+  background: $nav-background;
+
+  a {
+    color: $white;
+  }
+}
+.sm-container {
+  margin: 0 20px;
+}
+.lg-container {
+  margin: 0 40px;
+}
+
+.dash-section {
+  background: $white;
+}
+
+.stats-bottom {
+  position: relative;
+  top: 26px;
+}
+.stats-bottom-lg {
+  position: relative;
+  top: 20px;
+}
+
+.align-items-baseline {
+  align-items: baseline;
+}
+
+progress {
+  width: 100%;
+}
+
+.fade-bg {
+  background: $light-gray;
+}
+.filter-orange-bg {
+  background: $filter-orange;
+}
+.filter-teal-bg {
+  background: $filter-teal;
+}
+.select-style {
+  border: none;
+  border-right: 1px solid #ccc;
+  width: 100%;
+  overflow: hidden;
+  background: transparent url('../../../assets/images/arrow_down.png') no-repeat
+    90% 50%;
+}
+.select-style select {
+  padding: 10px 0;
+  color: #666;
+  width: 100%;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  background-image: none;
+  -webkit-appearance: none;
+}
+
+.select-style select:focus {
+  outline: none;
+}
+.number-large {
+  font-size: 3.5em;
+  font-weight: bolder;
+
+  &.number-mid {
+    font-size: 2em;
+  }
+}
+.text-bold {
+  font-weight: bolder;
+}
+.text-teal {
+  color: $text-teal;
+}
+.text-green {
+  color: $text-green;
+}
+.text-red {
+  color: $text-red;
+}
+.text-orange {
+  color: $text-orange;
+}
+
+.logo {
+  margin-left: 40px;
+  font-size: 20px;
+}
+.logo-image {
+  width: 130px;
+  height: 30px;
+  margin: 0px auto;
+}
+
+.nav-under {
+  background: $white;
+  div {
+    display: inline-block;
+    padding: 10px 50px 10px 0;
+    a {
+      color: $link-grey;
+    }
+  }
+}
+
+div.account_drop > a:hover {
+  text-decoration: underline;
+}
+
+.account_drop {
+  cursor: pointer;
+  ul li a {
+    width: 100%;
+  }
+}
+
+.account_list {
+  li {
+    margin: 10px;
+    width: 100%;
+    a {
+      display: block;
+      width: 100%;
+    }
+    a:hover {
+      color: blue;
+    }
+  }
+  box-shadow: #eee;
+  a {
+    text-decoration: none;
+  }
+  cursor: pointer;
+}
+
+.user-dropdown {
+  a {
+    text-decoration: none;
+    cursor: pointer;
+  }
+  a:hover {
+    color: $white;
+  }
+  div {
+    a {
+      color: black;
+    }
+  }
+}

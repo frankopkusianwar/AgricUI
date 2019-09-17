@@ -1,0 +1,114 @@
+<div class="container-fluid bg-contact">
+  <app-landing-header></app-landing-header>
+  <div class="row mt-1">
+    <div class="col pt-5 m-4">
+      <div class="row ">
+        <div class="row ">
+          <div class="col ">
+            <h1 class="py-3 px-5 text-secondary">Contact us</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="row">
+              <div class="col px-5 py-3">
+                <img src="../../../assets/images/google.png" />
+                <p class="ml-5 w-30 mt-n5 px-3">
+                  Intersevice tower, Plot 33 Lumumba Avenue, Nakaero Kampala
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col px-5">
+                <img src="../../../assets/images/mail.png" />
+                <p class="ml-5 mt-n4 px-3">info@akorion.com</p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="row">
+              <div class="col px-5 py-4">
+                <img src="../../../assets/images/phone.png" />
+                <p class="ml-5 mt-n5 px-3">
+                  +256&nbsp;392&nbsp;000&nbsp;374<br />
+                  +256&nbsp;392&nbsp;000&nbsp;374
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col px-5 py-3">
+                <img src="../../../assets/images/tv.png" />
+                <p class="ml-5 mt-n4 px-3">www.akorion.com </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col p-5">
+            <form class="" (submit)="onSubmit()"  [formGroup]="contactForm">
+                <h4>Contact Us.</h4>
+                <br />
+
+              <div class="alert alert-success" *ngIf="message">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {{ message }}
+              </div>
+
+              <div *ngIf="email.hasError('email')" class="alert alert-danger default-size">
+                  * Specify a valid email.
+              </div>
+
+              <div *ngIf="name.hasError('pattern')" class="alert alert-danger default-size">
+                  * Name should contain only alphabets, dash and spaces.
+              </div>
+
+              <span class="primary-text ">Send Message</span>
+              <div class="form-group ">
+                <input
+                  type="text"
+                  required
+                  class="form-control form-data"
+                  placeholder="Name"
+                  formControlName="name"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="email"
+                  required
+                  class="form-control form-data"
+                  placeholder="Email"
+                  formControlName="email"
+                />
+              </div>
+              <div class="form-group">
+                <textarea
+                  type="text"
+                  class="form-control form-data "
+                  rows=""
+                  required
+                  placeholder="Message"
+                  formControlName="message"
+                ></textarea>
+              </div>
+              <button type="submit" [ngStyle]="{'border': !contactForm.valid ? '1px solid': ''}" [ngClass]="{'btn-primary': !contactForm.valid ? false : true }" class="contact-btn btn-lg" [disabled]="!contactForm.valid">
+
+              <span class="spinner-border" *ngIf="loading" role="status" aria-hidden="true"></span>
+                SEND
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col gmap_canvas pt-5">
+      <iframe
+        class="frame"
+        id="gmap_canvas"
+        src="https://maps.google.com/maps?q=akorion%20comapany%20ltd&t=&z=13&ie=UTF8&iwloc=&output=embed"
+        scrolling="no"
+      ></iframe
+      ><a href="https://www.pureblack.de"></a>
+    </div>
+  </div>
+</div>

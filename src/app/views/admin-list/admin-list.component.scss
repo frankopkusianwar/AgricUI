@@ -1,0 +1,39 @@
+$text-teal: #8ecde4;
+.main {
+  margin: 0px;
+  padding: 0px;
+  min-height: 100vh;
+}
+
+.background-white {
+  background-color: white;
+}
+
+.create_btn {
+  width: 200px;
+  float: right;
+  cursor: pointer;
+}
+.create_btn:hover {
+  background-color: blue;
+  color: white;
+}
+.table_col {
+  height: 100vh;
+}
+.table_head {
+  background-color: $text-teal;
+  color: white;
+}
+.success-message {
+  position: absolute;
+  top: 10px;
+  left: auto;
+  z-index: 1;
+  margin: 0 auto;
+  width: auto;
+}
+
+.options {
+  cursor: pointer;
+}

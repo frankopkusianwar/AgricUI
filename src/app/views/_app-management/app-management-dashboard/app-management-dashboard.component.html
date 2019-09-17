@@ -1,0 +1,226 @@
+<div>
+  <app-navigation></app-navigation>
+  <app-app-dashboard-navigation></app-app-dashboard-navigation>
+
+  <div class="row dashboard_background ">
+    <div class="col m-4">
+      <div class="dash-section m-4 p-3">
+        <div class="col font-weight-bold text-black-50">
+          Dashboard
+        </div>
+        <div class="col" (click)="dateRange = !dateRange">
+          <button
+            class="btn float-right btn-md text-white px-3 filter-orange-bg mt-n4"
+            id="toggleMessage"
+          >
+            <span *ngIf="!dateRange"
+              >Show filter<i class="fas fa-chevron-down"></i
+            ></span>
+            <span *ngIf="dateRange"
+              >Hide filter<i class="fas fa-chevron-up"></i
+            ></span>
+          </button>
+        </div>
+        <hr />
+        <div class="m-2">&nbsp;</div>
+        <div class="row pt-1 bg-light" *ngIf="dateRange">
+          <div class="col-10">
+            <div class="px-3">
+              <select name="" id="input" class="form-control">
+                <option value="">-- All--</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-2">
+            <button
+              class="btn btn-md px-5 filter-teal-bg text-white float-right mr-3"
+            >
+              Apply
+            </button>
+          </div>
+          <div class="m-2">&nbsp;</div>
+        </div>
+      </div>
+      <div>
+        <div class="row report-cards px-3">
+          <div class="col-3">
+            <a routerLink="/mobile-agronomical" class="no-underline">
+              <div
+                class="new-orders  small-card nav-background text-white text-center px-5 m-auto"
+              >
+                <div class="py-4">
+                  <div class="mt-2">
+                    <h4><i class="fas fa-shopping-cart mr-3"></i>New Orders</h4>
+                  </div>
+                  <div>
+                    <h1 *ngIf="loaded; else elseBlock" class="ml-3">
+                      {{ totalNewOrders }}
+                    </h1>
+                    <ng-template #elseBlock>
+                      <div class="spinner d-flex">
+                        <span
+                          class="spinner-border spinner-border-md mx-auto"
+                          role="status"
+                        ></span>
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-3">
+            <div
+              class="payments bg-white small-card text-center text-background"
+            >
+              <div class="py-4">
+                <div class="mt-2">
+                  <h4><i class="fas fa-usd mr-3"></i>Payments(Ugx)</h4>
+                </div>
+                <div>
+                  <h1 *ngIf="loaded; else elseBlock" class="ml-5">
+                    {{ totalOrdersPayment }}
+                  </h1>
+                  <ng-template #elseBlock>
+                    <div class="spinner d-flex">
+                      <span
+                        class="spinner-border spinner-border-md mx-auto"
+                        role="status"
+                      ></span>
+                    </div>
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div
+              class="farmers bg-white small-card text-center text-background"
+            >
+              <div class="py-4">
+                <div class="mt-2">
+                  <h4><i class="fas fa-user-friends mr-3"></i>Farmers</h4>
+                </div>
+                <div>
+                  <h1 *ngIf="loaded; else elseBlock" class="ml-3">
+                    {{ totalFarmers }}
+                  </h1>
+                  <ng-template #elseBlock>
+                    <div class="spinner d-flex">
+                      <span
+                        class="spinner-border spinner-border-md mx-auto"
+                        role="status"
+                      ></span>
+                    </div>
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div
+              class="farmers bg-white small-card text-center text-background"
+            >
+              <div class="py-4">
+                <div class="mt-2">
+                  <h4><i class="fas fa-user-friends mr-3"></i>Agents</h4>
+                </div>
+                <div>
+                  <h1 *ngIf="loaded; else elseBlock" class="ml-3">
+                    {{ totalNumberOfAgents }}
+                  </h1>
+                  <ng-template #elseBlock>
+                    <div class="spinner d-flex">
+                      <span
+                        class="spinner-border spinner-border-md mx-auto"
+                        role="status"
+                      ></span>
+                    </div>
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="row px-3 mt-3">
+          <div class="col bg-white  m-3">
+            <div class="padding-20">
+              <h4 class="bold mt-3 text-center">Orders Distribution</h4>
+              <div *ngIf="loaded; else elseBlock" class="mt-4"></div>
+              <div style="display: block;">
+                <canvas
+                  baseChart
+                  [data]="ordersChartData"
+                  [labels]="ordersChartLabels"
+                  [chartType]="doughnutChartType"
+                  [colors]="doughnutChartColors"
+                >
+                </canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col bg-white m-3">
+            <h4 class="bold mt-3 text-center">Stock Available</h4>
+            <div *ngIf="loaded; else elseBlock" class="mt-4">
+              <canvas
+                baseChart
+                [data]="doughnutChartData"
+                [labels]="doughnutChartLabels"
+                [chartType]="doughnutChartType"
+                [colors]="doughnutChartColors"
+                [options]="options"
+              ></canvas>
+            </div>
+            <ng-template #elseBlock>
+              <div class="spinner d-flex mt-5">
+                <span
+                  class="spinner-border text-primary spinner-border-md mx-auto"
+                  role="status"
+                ></span>
+              </div>
+            </ng-template>
+          </div>
+          <div class="col bg-white m-3">
+            <div class="padding-20">
+              <h5 class="text-center bold">Input Categories</h5>
+              <br />
+              <table *ngIf="loaded; else elseBlock" class="table table-striped">
+                <tr *ngFor="let item of farmersOrders | keyvalue">
+                  <td>{{ item.key }}</td>
+                  <td>{{ item.value }}</td>
+                </tr>
+              </table>
+
+              <ng-template #elseBlock>
+                <div class="spinner d-flex">
+                  <span
+                    class="spinner-border spinner-border-md mx-auto"
+                    role="status"
+                  ></span>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="row farmers-vill-distribution  px-3 mt-3">
+            <div class="col-6">
+              <img
+                src="../../../assets/images/farmer-distribution-app-management.png"
+                style="width: 100%; height: 100%;"
+              />
+            </div>
+            <div class="col-6 bg-white">
+              <div class="padding-15">
+                <h5 class="text-center bold mt-3">Order Chart</h5>
+                <app-order-chart></app-order-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

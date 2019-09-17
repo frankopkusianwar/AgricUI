@@ -1,0 +1,22 @@
+$primary-color: #77b8e9;
+$filter-orange: #f38938;
+$white: #ffff;
+$filter-teal: #218a92;
+$nav-background: #1f4788;
+$action-color: #16c0ce;
+
+.dashboard_background {
+  margin: 0px;
+  padding: 0px;
+}
+.background {
+  background: $nav-background;
+}
+
+.spinner > span {
+  color: $primary-color;
+}
+
+.text-color {
+  color: $action-color;
+}

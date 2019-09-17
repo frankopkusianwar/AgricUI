@@ -1,0 +1,172 @@
+<div
+  class="modal fade p-5 m-5"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  *ngIf="id"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header " *ngIf="!success">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Account</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="closeModal()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="data; else spinnerDiv">
+        <div>{{ message }}</div>
+        <form
+          [formGroup]="form"
+          (ngSubmit)="handleSubmit()"
+          *ngIf="!success && data"
+        >
+          <div class="form-group">
+            <div *ngIf="!submitted; else spinnerDiv"></div>
+          </div>
+          <div class="form-group">
+            <label for="firstname">Account Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="account_name"
+              formControlName="account_name"
+              pattern="^([a-zA-Z\s\-\(\)]*)$"
+              placeholder="{{ data.account_name }}"
+            />
+            <div
+              *ngIf="submitted && form.controls.account_name.errors"
+              class="error_message"
+            >
+              <span *ngIf="form.controls.account_name.errors.pattern">
+                Please enter a valid account name.<br />
+                Only alphabetic characters are allowed.
+              </span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="lastname">Username</label>
+            <input
+              type="text"
+              class="form-control"
+              id="username"
+              placeholder="{{ data.username }}"
+              formControlName="username"
+              pattern="^([a-zA-Z\s\-\(\)]*)$"
+            />
+            <div
+              *ngIf="submitted && form.controls.username.errors"
+              class="error_message"
+            >
+              <span *ngIf="form.controls.username.errors.pattern">
+                Please enter a valid username.<br />
+                Only alphabetic characters are allowed.
+              </span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="contact_person">Contact Person</label>
+            <input
+              type="text"
+              class="form-control"
+              id="contact_person"
+              placeholder="{{ data.contact_person }}"
+              formControlName="contact_person"
+              pattern="^([a-zA-Z\s\-\(\)]*)$"
+            />
+            <div
+              *ngIf="submitted && form.controls.contact_person.errors"
+              class="error_message"
+            >
+              <span *ngIf="form.controls.contact_person.errors.pattern">
+                Please enter a valid contact name. Only alphabetic characters are
+                allowed.
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="phonenumber">Phonenumber</label>
+            <input
+              type="text"
+              class="form-control"
+              id="phonenumber"
+              placeholder="{{ data.phone_number }}"
+              formControlName="phonenumber"
+              pattern="^([0-9\s\-\+\(\)]*)$"
+              maxlength="17"
+            />
+            <div
+              *ngIf="submitted && form.controls.phonenumber.errors"
+              class="error_message"
+            >
+              <span *ngIf="form.controls.phonenumber.errors.pattern">
+                Please enter a valid phone number (it should be between 11 -17
+                digits) </span
+              ><br />
+              <span *ngIf="form.controls.phonenumber.errors.maxlength">
+                Phone number must not be greater than 17 digits. </span
+              ><br />
+              <span *ngIf="form.controls.phonenumber.errors.minlength">
+                Phone number must be at least 11 digits.
+              </span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="account_type">Select Value Chain</label>
+            <select
+              class="form-control"
+              id="value_chain"
+              formControlName="value_chain"
+            >
+              <option selected="selected">{{ data.value_chain }}</option>
+              <option>Crop</option>
+              <option>Dairy</option>
+              <option>N/A</option>
+            </select>
+          </div>
+          <button
+            type="button"
+            class="btn btn-danger mr-3"
+            data-dismiss="modal"
+            (click)="closeModal()"
+          >
+            CANCEL
+          </button>
+          <button
+            class="btn btn-primary ml-3"
+            data-toggle="modal"
+            data-target="#success"
+          >
+            EDIT ACCOUNT
+          </button>
+        </form>
+      </div>
+      <div (click)="closeModal()">
+        <button
+          type="button"
+          class="btn btn-primary px-5 mx-3 my-2"
+          *ngIf="success"
+          data-dismiss="modal"
+        >
+          Ok
+        </button>
+      </div>
+    </div>
+    <ng-template #spinnerDiv>
+        <div class="spinner d-flex justify-content-center text-primary">
+          <span
+            class="spinner-border spinner-border-md mx-auto"
+            role="status"
+          ></span>
+        </div>
+      </ng-template>
+  </div>
+</div>

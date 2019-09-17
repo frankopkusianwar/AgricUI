@@ -1,0 +1,39 @@
+$acceptBtnColor: #2fc1ce;
+$white: #fff;
+$grayColor: #ddd;
+.change-success-dialog {
+  margin-top: 250px;
+  .success-description {
+    width: 100%;
+    height: 250px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .success-icon {
+      width: 50px;
+      height: 50px;
+      border: 1px solid $grayColor;
+      border-radius: 100%;
+      padding: 10px;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .success-intro {
+      .accept-btn {
+        background-color: $acceptBtnColor;
+        padding: 7px;
+        padding-left: 30px;
+        padding-right: 30px;
+        color: $white;
+        outline: none;
+        box-shadow: none ;
+        border: none;
+        border-radius: 2px;
+      }
+    }
+  }
+}

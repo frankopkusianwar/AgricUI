@@ -1,0 +1,208 @@
+<div class="container-fluid main bcg-primary">
+  <app-landing-header></app-landing-header>
+  <div class="row mt-5 min-vh-100">
+    <div class="col p-4 ">
+      <div class="row">
+        <div class="col register-head p-4 mx-5">
+          <a routerLink="/register">
+            <i class="px-3 mt-5 ml-4 far fa-arrow-alt-circle-left arrow "></i>
+          </a>
+          <h3 class="px-5 ml-5 mt-n5 py-3 font-weight-normal">
+            {{ title }}
+          </h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col mx-5 px-5">
+          <div
+            *ngIf="success"
+            class="alert alert-success alert-dismissible fade show px-3 m-4 w-75"
+            role="alert"
+          >
+            <strong>Registration successful!</strong> You should check your mail
+            for your password
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div
+            *ngIf="db_errors"
+            class=" alert alert-danger alert-dismissible fade show m-4  w-75 error_message"
+            role="alert"
+          >
+            <div *ngFor="let error of db_errors | keyvalue">
+              <span class="error_message">{{ error.value }}</span>
+            </div>
+          </div>
+          <form
+            [formGroup]="Form"
+            (ngSubmit)="handleSubmit(Form.value)"
+            class=" account-form w-75 mx-4
+            text-brown"
+          >
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="name">Your Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="firstname"
+                  placeholder="First Name"
+                  formControlName="firstname"
+                  (keyup)="clearMessage()"
+                  pattern="^([a-zA-Z\s\-\+\(\)]*)$"
+                />
+                <div
+                  *ngIf="submitted && Form.controls.firstname.errors"
+                  class="error_message"
+                >
+                  <span *ngIf="Form.controls.firstname.errors.required">
+                    Please enter your last name.
+                  </span>
+                  <span *ngIf="Form.controls.firstname.errors.pattern">
+                    Please enter a valid name.<br />
+                    Only alphabetic characters are allowed.
+                  </span>
+                </div>
+              </div>
+              <div class="form-group col-md-6  py-4 mt-2">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="lastname"
+                  placeholder="Last Name"
+                  formControlName="lastname"
+                  pattern="^([a-zA-Z\s\-\+\(\)]*)$"
+                  (keyup)="clearMessage()"
+                />
+                <div
+                  *ngIf="submitted && Form.controls.lastname.errors"
+                  class="error_message"
+                >
+                  <span *ngIf="Form.controls.lastname.errors.required">
+                    Please enter your last name.
+                  </span>
+                  <span *ngIf="Form.controls.lastname.errors.pattern">
+                    Please enter a valid name.<br />
+                    Only alphabetic characters are allowed.
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputAddress">Company/Organization</label>
+              <input
+                type="text"
+                class="form-control"
+                id="address"
+                formControlName="address"
+                (keyup)="clearMessage()"
+                pattern="^([a-zA-Z\s\-\+\(\)]*)$"
+              />
+              <div
+                *ngIf="submitted && Form.controls.address.errors"
+                class="error_message"
+              >
+                <span *ngIf="Form.controls.address.errors.required">
+                  Please enter your organization/company name.
+                </span>
+                <span *ngIf="Form.controls.address.errors.pattern">
+                  Please enter a valid organization/company name<br />
+                  Only alphabetic characters are allowed.
+                </span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputAddress2">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                formControlName="email"
+                (keyup)="clearMessage()"
+              />
+              <div
+                *ngIf="submitted && Form.controls.email.errors"
+                class="error_message"
+              >
+                <span *ngIf="Form.controls.email.errors.required">
+                  Please enter your email address.
+                </span>
+                <span *ngIf="Form.controls.email.errors.email">
+                  Email must be a valid email address.
+                </span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputAddress2">Phonenumber</label>
+              <input
+                type="text"
+                class="form-control"
+                id="phonenumber"
+                formControlName="phonenumber"
+                (keyup)="clearMessage()"
+                pattern="^([0-9\s\-\+\(\)]*)$"
+                maxlength="17"
+              />
+              <div
+                *ngIf="submitted && Form.controls.phonenumber.errors"
+                class="error_message"
+              >
+                <span *ngIf="Form.controls.phonenumber.errors.required">
+                  Please enter your phone number.
+                </span>
+                <span *ngIf="Form.controls.phonenumber.errors.pattern">
+                  Please enter a valid phone number (it should be between 11 -17
+                  digits).
+                </span>
+                <span *ngIf="Form.controls.phonenumber.errors.maxlength">
+                  Phone number must not be greater than 17 digits.
+                </span>
+                <span *ngIf="Form.controls.phonenumber.errors.minlength">
+                  Phone number must be at least 11 digits.
+                </span>
+              </div>
+            </div>
+            <button class="btn w-100 my-2 register-btn">
+              <span
+                *ngIf="loading"
+                class="spinner-border spinner-border-md text-white"
+                role="status"
+              ></span>
+              <span *ngIf="loading" class="mx-2">Loading...</span>
+              <span *ngIf="!loading">
+                REQUEST ACCOUNT
+              </span>
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col p-5 mx-5 text-brown">
+          <p class="signup-link mx-3  mb-3 pb-3">
+            Already have an account?
+            <a routerLink="/" class="text-blue">Login to your account</a>
+          </p>
+          <p class=" mx-3 pb-5">
+            &copy; {{ today | date: 'y' }} Copyright Akorion Company Ltd
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="register-image">
+        <div>
+          <button class="btn btn-link">
+            <i class="fas fa-play"></i>
+          </button>
+          <span>Watch Video</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

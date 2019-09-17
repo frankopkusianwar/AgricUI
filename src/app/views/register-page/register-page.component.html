@@ -1,0 +1,62 @@
+<div class="container-fluid main bcg-primary">
+  <app-landing-header></app-landing-header>
+  <div class="row mt-4 ">
+    <div class="col register-head px-5 mt-5 ">
+      <a routerLink="/">
+        <i class="far fa-arrow-alt-circle-left arrow ml-5 px-5"></i>
+      </a>
+      <h3 class="font-weight-normal">Register for a new account</h3>
+    </div>
+  </div>
+  <div>
+    <div class="row m-5">
+      <div class="col-6  px-5  mb-5 ">
+        <div class="bg-white p-3 mx-2">
+          <h6 class="text-green font-weight-bold">OFF-TAKER</h6>
+          <p>
+            Account for out-growers and entities that work with farmers
+            associations to get products in bulk
+          </p>
+          <a routerLink="/register/off-taker">
+            <button class="btn bg-green text-white">Register</button>
+          </a>
+        </div>
+      </div>
+      <div class="col-6 mb-5">
+        <div class="bg-white p-3 mx-2">
+          <h6 class="text-grey font-weight-bold">FINANCIAL INSTITUTIONS</h6>
+          <p>
+            Account for out-growers and entities that work with farmers
+            associations to get products in bulk
+          </p>
+          <a routerLink="/register/financial-institution">
+            <button class="btn bg-grey text-white">Register</button>
+          </a>
+        </div>
+      </div>
+      <div class="col-6  px-5 mb-5">
+        <div class="bg-white p-3 mx-2">
+          <h6 class="text-violet font-weight-bold">MASTER AGENT</h6>
+          <p>
+            Account for out-growers and entities that work with farmers
+            associations to get products in bulk
+          </p>
+          <a routerLink="/register/master-agent">
+            <button class="btn bg-violet text-white">Register</button>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col px-5 ml-5 mt-n5">
+        <p class="signup-link mx-5  my-3 pb-5">
+          Already have an account?
+          <a routerLink="/" class="text-blue">Login to your account</a>
+        </p>
+        <p class="mx-5 pb-5">
+          &copy; {{ dateService.year }} Copyright Akorion Company Ltd
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

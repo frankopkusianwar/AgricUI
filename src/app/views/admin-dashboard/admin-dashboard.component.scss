@@ -1,0 +1,169 @@
+$nav-background: #77b8e9;
+$white: #fff;
+$red: #f00;
+$link-grey: #666;
+$light-gray: #eee;
+$filter-orange: #f38938;
+$filter-teal: #218a92;
+$text-teal: #3e9dc1;
+$text-green: #81cb93;
+$text-red: #f00;
+$text-orange: #d8a073;
+$text-gray: rgba(0, 0, 0, 0.5);
+$stripped-row: #efefef;
+
+nav {
+  background: $nav-background;
+
+  a {
+    color: $white;
+  }
+}
+.sm-container {
+  margin: 0 20px;
+}
+.lg-container {
+  margin: 0 40px;
+}
+
+.nav-under {
+  background: $white;
+
+  div {
+    display: inline-block;
+    padding: 10px 50px 10px 0;
+
+    a {
+      color: $link-grey;
+    }
+  }
+}
+
+.dash-section {
+  background: $white;
+}
+
+.stats-bottom {
+  position: relative;
+  top: 26px;
+}
+.stats-bottom-lg {
+  position: relative;
+  top: 20px;
+}
+
+.align-items-baseline {
+  align-items: baseline;
+}
+
+progress {
+  width: 100%;
+}
+
+.fade-bg {
+  background: $light-gray;
+}
+.filter-orange-bg {
+  background: $filter-orange;
+}
+.filter-teal-bg {
+  background: $filter-teal;
+}
+.select-style {
+  border: none;
+  border-right: 1px solid #ccc;
+  width: 100%;
+  overflow: hidden;
+  background: transparent url('../../../assets/images/arrow_down.png') no-repeat
+    90% 50%;
+}
+.select-style select {
+  padding: 10px 0;
+  color: #666;
+  width: 100%;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  background-image: none;
+  -webkit-appearance: none;
+}
+
+.select-style select:focus {
+  outline: none;
+}
+.number-large {
+  font-size: 3.5em;
+  font-weight: bolder;
+
+  &.number-mid {
+    font-size: 2em;
+  }
+}
+.text-bold {
+  font-weight: bolder;
+}
+.text-teal {
+  color: $text-teal;
+}
+.text-green {
+  color: $text-green;
+}
+.text-red {
+  color: $text-red;
+}
+.text-orange {
+  color: $text-orange;
+}
+
+.acreage-count span {
+  font-weight: bolder;
+  margin: 3px;
+  font-size: 18px;
+  color: $text-gray;
+  .account_drop {
+    cursor: pointer;
+  }
+}
+
+.filter-board-size{
+  width: 50%;
+  margin-top:5px;
+}
+.row-striped:nth-of-type(even){
+  background-color: $stripped-row;
+}
+.spinner > span {
+  color: $nav-background;
+ }
+.account_list {
+  li {
+    margin: 10px;
+    width: 100%;
+    a:hover {
+      color: blue;
+    }
+  }
+  box-shadow: #eee;
+
+  a {
+    text-decoration: none;
+  }
+
+  cursor: pointer;
+}
+
+#line-chart-container {
+  display: grid;
+  min-height: 400px;
+  max-height: 500px;
+
+}
+.col-lg-6 {
+  a {
+    text-decoration: none;
+    color: $link-grey;
+  }
+  a:hover {
+    color: blue;
+  }
+}

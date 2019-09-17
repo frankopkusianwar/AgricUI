@@ -1,0 +1,16 @@
+$white: #fff;
+$agric: #77b8e9;
+.stat-section {
+  background-color: $white;
+  border-radius: 5px;
+  height: 100%;
+  min-height: 20rem;
+}
+
+.thead-agric {
+  background-color: $agric;
+}
+
+.top-districts {
+  font-size: 0.7rem;
+}

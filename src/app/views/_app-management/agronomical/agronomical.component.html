@@ -1,0 +1,150 @@
+<div>
+  <app-navigation></app-navigation>
+  <app-app-dashboard-navigation></app-app-dashboard-navigation>
+
+<div class="nav-under px-5 py-2">
+  <div>
+    <a routerLink="/" class="withImage">
+      <img src="../../../../assets/icons/maize-icon.png" /> Maize
+    </a>
+  </div>
+  <div>
+    <a routerLink="/" class="withImage">
+      <img src="../../../../assets/icons/egg-plain-icon.png" /> Egg Plan</a>
+  </div>
+  <div>
+    <a routerLink="/" class="withImage">
+      <img src="../../../../assets/icons/onion-icon.png" />  Onion</a>
+  </div>
+  <div>
+    <a routerLink="/" class="withImage">
+      <img src="../../../../assets/icons/soya-beans-icon.png" /> Soya Beans</a>
+  </div>
+  <div>
+    <a routerLink="/mobile-agronomical" class="withImage">
+      <img src="../../../../assets/icons/sun-flower-icon.png" /> Sun Flower</a>
+  </div>
+  <div>
+    <a routerLink="/" class="withImage">
+      <img src="../../../../assets/icons/tomatos-icon.jpg" /> Tomatoes</a>
+  </div>
+  <div>
+    <a routerLink="/" class="withImage">
+      <img src="../../../../assets/icons/banana-icon.jpg" />  Bananas</a>
+  </div>
+  <div>
+    <a routerLink="/" class="withImage">
+      <img src="../../../../assets/icons/beans-icon.png" />  Beans</a>
+  </div>
+  <div>
+    <a routerLink="/" class="withImage">
+      <img src="../../../../assets/icons/cabbage-icon.png" /> Cabbage</a>
+  </div>
+</div>
+
+<div class="dash-section m-5 p-3 bg-white">
+  <div class="m-4">
+    <div class="col font-weight-bold text-black-50 ">
+      Agronomical Information/{{ type }}
+    </div>
+    <div class="col" (click)="showFilter = !showFilter">
+      <button class="btn float-right btn-md text-white px-3 filter-orange-bg mt-n4" id="toggleMessage">
+        <span *ngIf="!showFilter">Show filter<i class="fas fa-chevron-down"></i></span>
+        <span *ngIf="showFilter">Hide filter<i class="fas fa-chevron-up"></i></span>
+      </button>
+    </div>
+  </div>
+  <hr />
+  <div class="row py-1 m-4 border-bottom filter-panel" *ngIf="showFilter">
+    <div class="col-5">
+      <p class="font-weight-bold">Activity</p>
+      <select class="w-100 custom-select">
+         <option>All</option>
+      </select>
+    </div>
+    <div class="col-5">
+      <p class="font-weight-bold">Title</p>
+      <select class="w-100 custom-select">
+         <option>All</option>
+      </select>
+    </div>
+    <div class="col-2 buttons" align="right">
+        <button
+          class="btn btn-md filter-teal-bg text-white apply"
+        >
+          Apply
+        </button>
+        <button
+          class="btn btn-md bg-dark disabled text-white clear"
+        >
+          Clear
+        </button>
+      </div>
+  </div>
+</div>
+
+<div class="dash-section m-5 bg-white">
+        <div class="m-4">&nbsp;</div>
+    <div class="m-4 row">
+      <div class="col-6 p-4">
+        <span class="btn float-left">
+          {{type}}
+        </span>
+      </div>
+      <div class="col p-4">
+        <button class="float-right btn bg-primary text-white">
+          <i class="fas fa-plus mr-2"></i>Add Agronomical Information
+        </button>
+        <button class="float-right btn bg-navy mx-3 py-2">
+          <i class="fas fa-plus mr-2"></i>Add Crop
+        </button>
+      </div>
+    </div>
+    <div class="m-5">
+      <table class="table table-striped ">
+        <thead w-100 class="table_head">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Activity</th>
+            <th scope="col">Image</th>
+            <th scope="col">Crop</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody p-5>
+          <tr *ngFor="
+                    let row of data
+                      | paginate: { itemsPerPage: count, currentPage: page };
+                      let i = index
+                  ">
+            <td> {{(page - 1) * count + i+1}}</td>
+            <td>{{ row.activity }}</td>
+            <td><img src="{{ row.image }}" width="80" height="80" alt="{{row.activity}}" /></td>
+            <td>{{ row.crop }}</td>
+            <td>{{ row.title }}</td>
+            <td>{{ row.description }}</td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  ACTION
+                </button>
+                <div class="dropdown-menu options" aria-labelledby="dropdownMenuButton">
+                  <div id="edit" (click)="setAction(row, 'edit')">
+                    <a class="dropdown-item items">View</a>
+                  </div>
+                  <a class="dropdown-item suspend">Edit</a>
+                  <a class="dropdown-item activate">Delete</a>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="m-4">&nbsp;</div>
+    </div>
+    <div class="m-4">&nbsp;</div>
+</div>
+</div>

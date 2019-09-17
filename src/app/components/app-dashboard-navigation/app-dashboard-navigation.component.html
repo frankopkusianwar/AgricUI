@@ -1,0 +1,57 @@
+ <nav class="navbar navbar-expand-lg navbar-light bg-white px-5 py-2">
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/mobile-dashboard" [ngClass]="isPage('mobile-dashboard') ? 'active': ''"> Dashboard</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false" [ngClass]="isPage('mobile-orders-received-orders') || isPage('mobile-orders-completed-orders') ? 'active': ''">
+          Orders
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item bg-white" routerLink="/mobile-orders-received-orders"
+            [ngClass]="isPage('mobile-orders-received-orders') ? 'active': ''">Received Orders</a>
+          <a class="dropdown-item bg-white " routerLink="/mobile-orders-completed-orders"
+            [ngClass]="isPage('mobile-orders-completed-orders') ? 'active': ''">Completed Orders</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a
+            class="nav-link"
+            routerLink="/mobile-inputs"
+            [ngClass]="isPage('mobile-inputs') ? 'active': ''"
+            > Input</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a
+        class="nav-link dropdown-toggle"
+        id="navbarDropdownMenuLink"
+        data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false"
+         [ngClass]="isPage('mobile-pests') || isPage('mobile-diseases') ? 'active': ''">
+        Diagonsis
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item bg-white" routerLink="/mobile-diseases" [ngClass]="isPage('mobile-diseases') ? 'active': ''">Disease</a>
+          <a class="dropdown-item bg-white " routerLink="/mobile-pests"  [ngClass]="isPage('mobile-pests') ? 'active': ''">Pest</a>
+          <a class="dropdown-item bg-white" href="#">Enquires</a>
+        </div>
+      </li>
+
+      <li class="nav-item">
+        <a
+            class="nav-link"
+            routerLink="/mobile-agronomical"
+            [ngClass]="isPage('mobile-agronomical') ? 'active': ''"
+            > Agronomical Info</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/"> Weather</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/"> Reports</a>
+      </li>
+    </ul>
+  </div>
+</nav>

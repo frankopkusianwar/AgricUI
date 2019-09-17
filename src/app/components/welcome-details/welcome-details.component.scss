@@ -1,0 +1,60 @@
+$black-tp: rgba(0, 0, 0, 0.5);
+$landing-color: rgb(119, 184, 232);
+
+.app-landing-container {
+  text-align: center;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(to right, $black-tp, $black-tp),
+    url('../../../assets/images/home-image.jpg');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: left;
+  font-weight: 500;
+  line-height: 30px;
+  min-height: 100vh;
+
+  div {
+    width: 70%;
+  }
+
+  p {
+    font-size: 1.5em;
+    margin: 30px 0px;
+  }
+
+  h1 {
+    padding-top: 180px;
+    font-size: 4em;
+  }
+  div {
+    padding-bottom: 80px;
+
+    .landing-link {
+      background-color: $landing-color;
+      border: 1px solid $landing-color;
+      cursor: pointer;
+    }
+  }
+}
+
+@media (max-width: 667.98px) {
+  .app-landing-container {
+
+    div {
+      width: 100%;
+    }
+
+    .m-auto {
+      padding: 10px;
+      h1 {
+        padding-top: 180px;
+        font-size: 3em;
+      }
+      p {
+        font-size: 1em;
+      }
+    }
+  }
+}
+

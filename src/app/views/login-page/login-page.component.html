@@ -1,0 +1,87 @@
+<div class="container-fluid main">
+  <app-landing-header></app-landing-header>
+  <div class="row landing-body">
+    <div class="col app-landing-container">
+      <app-welcome-details></app-welcome-details>
+    </div>
+    <div class="col app-landing-form mt-5">
+      <div class="mx-5 form-wrapper">
+        <div *ngIf="error" class="mt-5 pt-5 error_message" role="alert">
+          {{ error }}
+        </div>
+
+        <h4 class="mt-5">Login to your account</h4>
+        <form
+          [formGroup]="loginForm"
+          (ngSubmit)="handleSubmit(loginForm.value)"
+        >
+          <div class="form-group">
+            <input
+              formControlName="email"
+              (keyup)="clearMessage()"
+              type="email"
+              class="form-control"
+              id="email"
+              aria-describedby="emailHelp"
+              placeholder="Email "
+              required
+            />
+            <div
+              *ngIf="submitted && loginForm.controls.email.errors"
+              class="error_message"
+            >
+              <span *ngIf="loginForm.controls.email.errors.required">
+                email is required
+              </span>
+              <span *ngIf="loginForm.controls.email.errors.email">
+                must be a valid email
+              </span>
+            </div>
+          </div>
+          <div class="form-group">
+            <input
+              formControlName="password"
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="Password"
+              (keyup)="clearMessage()"
+              required
+            />
+            <div
+              *ngIf="submitted && loginForm.controls.password.errors"
+              class="error_message"
+            >
+              <span *ngIf="loginForm.controls.password.errors.required">
+                password is required
+              </span>
+            </div>
+          </div>
+
+          <button class="btn login-btn" [disabled]="isLoggedIn">
+            <div>
+              <span
+                *ngIf="loading"
+                class="spinner-border spinner-border-md text-white"
+                role="status"
+              ></span>
+              <span *ngIf="loading" class="mx-2">Loading...</span>
+            </div>
+            <span *ngIf="!loading">
+              LOGIN
+            </span>
+          </button>
+        </form>
+        <p>
+          <a routerLink="/forgot-password">Forgot Password?</a>
+          <br />
+        </p>
+        <p class="signup-link">
+          Don't have an account?
+          <a routerLink="/register">Request for an account</a>
+        </p>
+        <p>&copy; {{ dateService.year }} Copyright Akorion Company Ltd</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,197 @@
+<div
+  class="modal fade p-5 m-5"
+  id="diagnosisModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-color" id="diagnosisModalLabel">Add {{ category | titlecase }} Info</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="closeModal()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+          *ngIf="crops; else divSpinner"
+          #createDiagnosisForm="ngForm"
+          (submit)="handleSubmit(createDiagnosisForm.value)"
+          id="diagnosisForm"
+        >
+          <div class="form-group">
+            <label for="diagnosisName">{{ category | titlecase }} name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="diagnosisName"
+              aria-describedby="nameHelp"
+              name="name"
+              #name="ngModel"
+              [(ngModel)]="model.name"
+              pattern="^([a-zA-Z0-9\s\-\(\)]*)$"
+              required
+            />
+            <div
+              *ngIf="name.touched && !name.valid"
+              class="error_message"
+            >
+              <span *ngIf="name.hasError('required')">
+                Please the {{ category }} name field is required
+              </span>
+              <span *ngIf="name.hasError('pattern')">
+                Please enter a valid {{ category }} name.<br />
+                Only alpha numeric characters are allowed.
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="diagnosisCause">Cause</label>
+            <input
+              type="text"
+              class="form-control"
+              id="diagnosisCause"
+              name="cause"
+              #cause="ngModel"
+              [(ngModel)]="model.cause"
+              pattern="^([a-zA-Z\s\-\(\)]*)$"
+              required
+            />
+            <div
+              *ngIf="cause.touched && !cause.valid"
+              class="error_message"
+            >
+              <span *ngIf="cause.hasError('required')">
+                Please the cause field is required
+              </span>
+              <span *ngIf="cause.hasError('pattern')">
+                Please enter a valid cause<br />
+                Only alphabetic characters are allowed.
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="diagnosisCrop">Select Crop</label>
+            <select
+              class="form-control form-control"
+              id="diagnosisCrop"
+              name="crop"
+              #crop="ngModel"
+              [(ngModel)]="model.crop"
+              required
+            >
+              <option *ngFor="let cropItem of crops.data" class="crop">
+                {{ cropItem.name }}
+              </option>
+            </select>
+            <div
+              *ngIf="crop.touched && !crop.valid"
+              class="error_message"
+            >
+              <span *ngIf="crop.hasError('required')">
+                Please Select a crop
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="diagnosisControl">Prevention and control</label>
+            <quill-editor
+              id="diagnosisControl"
+              name="control"
+              #control="ngModel"
+              [(ngModel)]="model.control"
+              [modules]="quillConfig"
+              (onEditorChanged)="clearErrorMessage(control)"
+            >
+            </quill-editor>
+            <div
+              *ngIf="requiredField.control"
+              class="error_message"
+            >
+              Please the prevention field is required
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="diagnosisPhoto">Image</label>
+            <input
+              type="file"
+              class="form-control"
+              id="diagnosisPhoto"
+              name="photo"
+              #photo="ngModel"
+              [(ngModel)]="model.photo"
+              (change)="processPhoto($event)"
+              required
+            />
+            <div
+              *ngIf="photo.touched && !photo.valid || requiredField.photo"
+              class="error_message"
+            >
+              Please upload the crop image (jpeg, jpg or png, 2MB allowed)
+            </div>
+          </div>
+
+          <div class="from-group">
+            <label for="diagnosisExplanation">{{ explanationTitle | titlecase }}</label>
+            <quill-editor
+              id="diagnosisExplanation"
+              [modules]="quillConfig"
+              name="explanation"
+              #explanation="ngModel"
+              [(ngModel)]="model.explanation"
+              (onEditorChanged)="clearErrorMessage(explanation)"
+            >
+            </quill-editor>
+            <div
+              *ngIf="requiredField.explanation"
+              class="error_message"
+            >
+              Please the {{ explanationTitle }} field is required
+            </div>
+          </div>
+
+          <div class="my-3 d-flex flex-row-reverse">
+            <button
+              type="button"
+              class="btn btn-secondary ml-3"
+              data-dismiss="modal"
+              (click)="closeModal()"
+            >
+              CANCEL
+            </button>
+            <button
+              type="submit"
+              class="btn button-color text-white"
+              [disabled]="!createDiagnosisForm.form.valid"
+            >
+            <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true">
+            </span>
+              SAVE INFO
+            </button>
+          </div>
+        </form>
+        <ng-template #divSpinner>
+          <div class="spinner d-flex">
+            <span
+              class="spinner-border spinner-border-md mx-auto"
+              role="status"
+            >
+            </span>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

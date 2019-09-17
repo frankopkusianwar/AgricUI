@@ -1,0 +1,52 @@
+$nav-color: #77b8e9;
+
+body {
+  background: #fefcfa;
+  min-height: 100vh;
+}
+.gmap_canvas {
+  background: none !important;
+  padding-right: 0;
+  height: calc(100vh - 10px);
+}
+.lg-container {
+  margin: 0 40px;
+}
+.contact-details {
+  i {
+    font-size: 24px;
+  }
+  font-size: 18px;
+  color: #9e9b9b;
+}
+
+.frame {
+  width: 100%;
+  height: 100%;
+  border: 0px;
+  padding: 0px;
+}
+.contact-btn {
+  border: none;
+  width: 450px;
+}
+
+.primary-text {
+  color: #77b8e9;
+}
+.primary-background {
+  background-color: #77b8e9;
+}
+.bg-contact {
+  background: #fefcfa;
+}
+.pitch-text {
+  color: #ff9999;
+}
+.gray-text {
+  color: #9fbfdf;
+}
+
+.alert {
+  width: 450px;
+}

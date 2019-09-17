@@ -1,0 +1,122 @@
+$black-tp: rgba(0, 0, 0, 0.5);
+$nav-color: #77b8e9;
+.main {
+  margin: 0px;
+  padding: 0px;
+  min-height: 100vh;
+
+  .landing-body {
+    padding: 0px;
+    margin: 0px;
+    min-height: 100vh;
+  }
+
+  .app-landing-text {
+    width: 60%;
+  }
+  .app-landing-container-bg {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  .app-landing-container {
+    text-align: center;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(to right, $black-tp, $black-tp),
+      url('../../../assets/images/home-image.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: left;
+    font-weight: 500;
+    line-height: 30px;
+    div {
+      width: 70%;
+    }
+
+    p {
+      font-size: 1.5em;
+      margin: 30px 0px;
+    }
+
+    h1 {
+      padding-top: 180px;
+      font-size: 4em;
+    }
+
+    div {
+      padding-bottom: 80px;
+
+      .landing-link {
+        background-color: $nav-color;
+        border: 1px solid $nav-color;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .app-landing-form {
+    background-color: rgba(168, 159, 163, 0.158);
+    justify-content: center;
+    line-height: 20px;
+    color: rgb(104, 103, 103);
+
+    div {
+      width: 90%;
+    }
+    h4 {
+      font-size: 18px;
+    }
+    form {
+      margin-bottom: 20px;
+      input {
+        width: 60%;
+        height: 45px;
+        border: 1px solid rgba(128, 128, 128, 0.363);
+        font-size: 17px;
+        color: rgba(128, 128, 128, 0.788);
+      }
+    }
+
+    p {
+      font-size: 20px;
+    }
+    .signup-link {
+      margin-bottom: 30%;
+      margin-top: 6%;
+      a {
+        color: #77b8e9;
+        text-decoration: none;
+      }
+    }
+    
+    .modal-header {
+      border: none;
+      background-color: rgb(7, 6, 6);
+    }
+  }
+  .landing-video {
+    width: 100%;
+    height: 540px;
+  }
+}
+.text-white {
+  color: white;
+}
+.text-black {
+  color: black;
+}
+.no-outline {
+  outline: none;
+}
+.alert-div {
+  width: 200px;
+}
+
+.error_message {
+  width: 280px;
+  height: 30px;
+  color: red;
+}
+
+.form-wrapper {
+  margin-top: 200px;
+}

@@ -1,0 +1,46 @@
+<div>
+  <div class="row">
+    <div class="col">
+      <div>
+        <div style="display: block">
+          <canvas
+            baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+            [colors]="ChartColor"
+          >
+          </canvas>
+          <div class="order-dropdown float-right mr-5">
+            <div class="dropdown mr-5">
+              <button
+                class="btn btn-secondary dropdown-toggle mr-5 bg-primary border-0"
+                type="button"
+                id="dropdownMenuButton"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                All
+              </button>
+              <div
+                class="dropdown-menu mr-5"
+                aria-labelledby="dropdownMenuButton"
+              >
+                <a
+                  class="dropdown-item"
+                  id="{{ order }}"
+                  *ngFor="let order of orders"
+                  (click)="getOrderData(order)"
+                  >{{ order }}</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

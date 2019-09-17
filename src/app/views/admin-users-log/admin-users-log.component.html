@@ -1,0 +1,100 @@
+<app-navigation></app-navigation>
+<div class="m-2">&nbsp;</div>
+  <div class="container">
+
+    <div class="row jumbotron bg-white">
+
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <h3 class="float-left">Logs</h3>
+
+          <span class="btn bg-orange text-white btn-md float-right" (click)="enableFilter=!enableFilter">
+              <span *ngIf="enableFilter">Hide Filter &nbsp; <i class="fas fa-caret-square-o-down"></i>&nbsp; </span>
+              <span *ngIf="!enableFilter">Show Filter &nbsp; <i class="fas fa-caret-square-o-up"></i>&nbsp; </span>
+          </span>
+      </div>
+
+      <div class="m-2 col-sm-12 border-bottom">&nbsp;</div>
+
+
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 row container">
+          <div class="col-12" *ngIf="enableFilter">
+            <h6>Date ranges</h6>
+
+            <div class="input-group">
+                <input
+                [owlDateTime]="dt1"
+                [owlDateTimeTrigger]="dt1"
+                placeholder="Select Start Date"
+                class="form-control w-25"
+                [(ngModel)]="startDateVal"
+              />
+              <owl-date-time [pickerType]="'both'" #dt1></owl-date-time>
+
+            <input
+            [owlDateTime]="dt2"
+            [owlDateTimeTrigger]="dt2"
+            placeholder="Select Start Date"
+            class="form-control w-25"
+            [(ngModel)]="endDateVal"
+          />
+          <owl-date-time [pickerType]="'both'" #dt2></owl-date-time>
+
+          <button type="submit" (click)="getDateRange()" class="btn col-1 text-white btn-info" *ngIf="!loading">Apply</button>
+          <div class="spinner-border" role="status" *ngIf="loading">
+            <span class="sr-only">Loading...</span>
+          </div>
+            </div>
+
+
+            <div class="col-1"></div>
+      </div>
+
+      <div class="m-4 col-sm-12 ">&nbsp;</div>
+
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 row container">
+          <div class="col-2">
+            <h5>User Logs </h5>
+          </div>
+          <div class="col-10">
+
+            <button type="submit" (click)="onExportCSV()" class="btn bg-gray float-right">Export &nbsp; <i class="fas fa-file-export"></i></button>
+
+            <button type="submit" (click)="printable()" class="btn bg-gray float-right">Print &nbsp; <i class="fas fa-print"></i></button>
+
+            <button type="submit" class="btn bg-gray float-right" (click)="search=!search">Search&nbsp; <i class="fas fa-search"></i> </button>
+
+            <input class="form-control float-right w-50" *ngIf="search" (keyup)="searchTable($event)">
+            </div>
+          </div>
+      <div class="m-2 col-sm-12 border-bottom">&nbsp;</div>
+      <table class="table table-striped " id="printable">
+          <thead w-100 class="table_head">
+            <tr>
+              <th scope="col">S/N</th>
+              <th scope="col">Email</th>
+              <th scope="col">Account Name</th>
+              <th scope="col">Activity</th>
+              <th scope="col">Time</th>
+            </tr>
+          </thead>
+          <tbody p-5>
+            <tr
+              *ngFor="
+                let row of tempData
+                  | paginate: { itemsPerPage: count, currentPage: page }
+              "
+            >
+              <td>{{ row.serial }}</td>
+              <td>{{ row.email }}</td>
+              <td>{{ row.user }}</td>
+              <td>{{ row.activity }}</td>
+              <td>{{ formatDate(row.time) }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <nav aria-label="Page navigation">
+          <pagination-controls (pageChange)="page = $event"></pagination-controls>
+        </nav>
+    </div>
+
+  </div>

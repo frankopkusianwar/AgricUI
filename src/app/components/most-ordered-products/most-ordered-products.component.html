@@ -1,0 +1,68 @@
+<div class="col ml-3 mt-3 p-5 most-ordered" style="width: 97.5%; min-height: 482px;">
+  <div class="products-services-filter d-flex justify-content-between mb-5">
+    <h4>Most Ordered Products and Services</h4>
+    <div class="w-50 d-flex">
+      <select #filterType class="custom-select ml-2" (change)="filterTypeChange(filterType.value)" style="max-width: 20rem;">
+        <option value="enterprises" selected>Enterprise</option>
+        <option value="districts">District</option>
+      </select>
+      <select #filterValue *ngIf="filterLoaded; else filterLoading" class="custom-select ml-2" (change)="getProductsAndServices(filterValue.value)">
+        <option *ngFor="let filterItem of filterData.data" [value]="filterItem.name">{{ filterItem.name }}</option>
+      </select>
+      <ng-template #filterLoading>
+        <div class="spinner-border ml-1" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  <div class="row">
+    <div *ngIf="!productsAndServicesLoaded; else productsAndServicesChart" class="spinner d-flex w-100">
+      <span
+        class="spinner-border mx-auto"
+        role="status"
+      ></span>
+    </div>
+    <ng-template #productsAndServicesChart>
+      <div class="col-md-6">
+        <p class="font-weight-bold">Products</p>
+        <ngx-charts-bar-horizontal
+          class="chart-container"
+          [view]="productView"
+          [results]="products"
+          [scheme]="colorScheme"
+          [gradient]="gradient"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabelProducts"
+          [roundEdges]="roundEdges"
+        >
+        </ngx-charts-bar-horizontal>
+      </div>
+      <div class="col-md-6">
+        <div class="pull-right">
+          <div class="mt-5">
+            <p class="font-weight-bold">Services</p>
+          </div>
+        </div>
+        <ngx-charts-bar-horizontal
+          class="chart-container"
+          [view]="serviceView"
+          [results]="services"
+          [scheme]="colorScheme"
+          [gradient]="gradient"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabelServices"
+          [roundEdges]="roundEdges"
+        >
+        </ngx-charts-bar-horizontal>
+      </div>
+    </ng-template>
+  </div>
+</div>
+  

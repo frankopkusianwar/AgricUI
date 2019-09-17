@@ -1,0 +1,203 @@
+<div class="container-fluid main">
+  <app-navigation></app-navigation>
+
+  <div class="row">
+    <div class="row table_title mt-5 background-white w-100">
+      <div class="row w-100 p-3 mx-5">
+        <div class="col mx-5 px-5 title">
+          <h3 class="my-4">{{ title }}</h3>
+        </div>
+        <div class="col-6 px-2 w-100">
+          <div class=" mx-5 px-5 w-100">
+            <a routerLink="/create/{{ type }}" class="btn btn-primary btn-lg active mx-5 my-3 create_btn" role="button"
+              aria-pressed="true" *ngIf="hideActionsColumn">New Account</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row background-white p-3" *ngIf="data && data.length > 0;">
+    <div class="col">
+      <div class="w-5 ml-5 pull-left">
+        <select class="form-control" (change)="changePageLimit($event.target.value)">
+          <option *ngFor="let p of [5,10,15,20]; let i = index" [selected]="i==1">{{p}}</option>
+        </select>
+      </div>
+      <div class="w-50 pull-right">
+        <div class="table-actions d-flex">
+          <button type="submit" (click)="onExportCSV()" class="btn bg-gray ml-5">Export &nbsp; <i
+              class="fas fa-file-export"></i></button>
+          <button type="submit" (click)="printable()" class="btn bg-gray ml-5 mr-5
+          ">Print &nbsp; <i class="fas fa-print"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center m-5 p-5 text-primary" *ngIf="!data||loading">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+  <div class="row table_col" *ngIf="!loading">
+    <div class="col background-white py-2 px-5" *ngIf="data">
+      <table class="table table-striped ">
+        <thead w-100 class="table_head">
+          <tr *ngIf="!hideActionsColumn">
+            <th scope="col">S/N</th>
+            <th scope="col">Name</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Master Agents</th>
+            <th scope="col">Development Partner</th>
+            <th scope="col">District</th>
+            <th scope="col">Farmers</th>
+            <th scope="col">Time Joined</th>
+          </tr>
+          <tr *ngIf="hideActionsColumn">
+            <th scope="col">S/N</th>
+            <th scope="col">Account Name</th>
+            <th scope="col">User Name</th>
+            <th scope="col">Contact Person</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Value Chain</th>
+            <th scope="col">Duration</th>
+            <th scope="col">Status</th>
+            <th *ngIf="hideActionsColumn" scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody p-5 *ngIf="!hideActionsColumn">
+          <tr *ngFor="
+              let row of data 
+              | paginate: { itemsPerPage: limit, currentPage: page,totalItems:count }
+              let i = index ">
+            <td>{{ data.indexOf(row)+1 }}</td>
+            <td>{{ row.va_name }}</td>
+            <td>{{ row.va_phonenumber }}</td>
+            <td>{{ row.master_agent.username? row.master_agent.username: 'NA' }}</td>
+            <td>{{ row.devt_partner.username ? row.devt_partner.username : 'NA' }}</td>
+            <td>{{ row.va_district }}</td>
+            <td>{{ row.total_number_of_farmers }}</td>
+            <td>{{ row.created_at | date }}</td>
+        </tbody>
+        <tbody p-5 *ngIf="hideActionsColumn">
+          <tr *ngFor="
+              let row of data
+                | paginate: { itemsPerPage: limit, currentPage: page,totalItems:count };
+                let i = index
+            ">
+            <td> {{(page - 1) * limit + i+1}}</td>
+            <td>{{ row.account_name }}</td>
+            <td>{{ row.username }}</td>
+            <td>{{ row.contact_person }}</td>
+            <td>{{ row.phone_number }}</td>
+            <td>{{ row.value_chain }}</td>
+            <td>{{ fromNow(row.created_at) }}</td>
+            <td>{{ row.status }}</td>
+            <td *ngIf="hideActionsColumn">
+              <div class="dropdown">
+                <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  OPTIONS
+                </button>
+                <div class="dropdown-menu options" aria-labelledby="dropdownMenuButton">
+                  <div id="edit" (click)="setAction(row, 'edit')">
+                    <a class="dropdown-item items" data-toggle="modal" data-target="#exampleModal">Edit</a>
+                  </div>
+                  <a class="dropdown-item suspend" id="suspend" (click)="setAction(row, 'Suspend')" data-toggle="modal"
+                    data-target="#exampleModalLong">Suspend</a>
+                  <a class="dropdown-item activate" id="activate" (click)="setAction(row, 'Activate')"
+                    data-toggle="modal" data-target="#exampleModalLong">Activate account</a>
+                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#csvModal"
+                    (click)="setCurrentId(row._id)">Upload VA List(Excel)</a>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <pagination-controls (pageChange)="getData($event)"></pagination-controls>
+      <!-- Modal -->
+      <div class="modal fade mt-5 p-5" id="exampleModalLong" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header" *ngIf="!actionSuccess">
+              <h5 class="modal-title text-info" id="exampleModalLongTitle">
+                {{ action }} Account
+              </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <span *ngIf="actionSuccess && message">{{ message }}</span>
+              <span *ngIf="!actionSuccess">
+                <div *ngIf="!submitted; else spinnerDiv"></div>
+                Are you sure you want to {{ action | lowercase }} this account?
+              </span>
+            </div>
+            <div class="modal-footer">
+              <div *ngIf="!actionSuccess">
+                <button type="button" class="btn btn-danger mr-3" data-dismiss="modal">
+                  Close
+                </button>
+                <button type="button" class="btn btn-primary status ml-3"
+                  (click)="changeStatus(selectedUser._id, action)">
+                  {{ action }} Account
+                </button>
+              </div>
+              <div *ngIf="actionSuccess && message">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">
+                  OK
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <app-edit-modal [id]="id" [userId]="userId" [accountUrl]="url" *ngIf="id && userId" (EditAcct)="updateOnEdit()"
+        (modalClose)="closeEditModal()"></app-edit-modal>
+      <div class="modal fade mt-5 p-5" id="csvModal" tabindex="-1" role="dialog" aria-labelledby="csvModalTitle"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-info" id="csvModalTitle">
+                Upload village agent list
+              </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body csv-modal">
+              <div *ngIf="(apiError !== null || apiSuccessMessage !== null) else spinnerDiv"></div>
+              <h6>Please upload only Excel/CSV files</h6>
+              <div *ngIf="apiError && apiError.status === 400" class="alert alert-danger" role="alert">
+                {{apiError.error.error}}
+              </div>
+              <div *ngIf="apiError && !apiError.status" class="alert alert-danger" role="alert">
+                <div *ngFor="let error of apiError">
+                  {{ error }}
+                </div>
+              </div>
+              <div *ngIf="apiSuccessMessage" class="alert alert-success" role="alert">
+                {{ apiSuccessMessage.message }}
+              </div>
+              <p>
+                <csv2json [btnText]="'Browse'" [errorMsg]="'Invalid file.'" (response)="onUpload($event)"></csv2json>
+              </p>
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #spinnerDiv>
+      <div class="spinner d-flex justify-content-center text-primary">
+        <span class="spinner-border spinner-border-md mx-auto" role="status"></span>
+      </div>
+    </ng-template>
+  </div>
+</div>

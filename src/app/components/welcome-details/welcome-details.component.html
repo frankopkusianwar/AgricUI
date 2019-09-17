@@ -1,0 +1,48 @@
+
+            <div class="m-auto">
+                <h1 class="font-weight-bold">EZYAGRIC</h1>
+                <p class="about-ezy">
+                  Farmers profiling solution for offtakers Master agents and Financial
+                  institution in one place
+                </p>
+                <div>
+                  <a class="btn btn-primary landing-link mr-4" routerLink="/about"
+                    >LEARN MORE</a
+                  >
+                  <button
+                    id="landing-video"
+                    type="button"
+                    class="btn btn-outline-light landing-link"
+                    data-toggle="modal"
+                    data-target="#videoModal"
+                    (click)="toggleVideo()"
+                  >
+                    WATCH VIDEO &#9658;
+                  </button>
+                </div>
+              </div>
+
+              <div class="modal fade" id="videoModal">
+                  <div class="modal-dialog modal-dialog-centered modal-xl">
+                    <div class="modal-content">
+                      <!-- Modal Header -->
+                      <div class="modal-header">
+                        <button
+                          (click)="toggleVideo()"
+                          id="cancel-btn"
+                          type="button"
+                          class="close text-black no-outline"
+                          data-dismiss="modal"
+                        >
+                          &times;
+                        </button>
+                      </div>
+                      <video
+                        class="no-outline landing-video"
+                        controls
+                        id="welcomeVideo"
+                        src="{{ src }}"
+                      ></video>
+                    </div>
+                  </div>
+                </div>

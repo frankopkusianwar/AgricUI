@@ -1,0 +1,12 @@
+$primary-color: #77b8e9;
+.report-page-container {
+  display: flex;
+
+  &__main {
+    width: 100%;
+  }
+}
+
+.spinner > span {
+ color: $primary-color;
+}

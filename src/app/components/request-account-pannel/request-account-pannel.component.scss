@@ -1,0 +1,82 @@
+$black-tp: rgba(0, 0, 0, 0.5);
+
+.bcg-primary {
+  background-color: #eff0f2;
+  overflow: hidden;
+}
+.register-head {
+  .arrow {
+    font-size: 40px;
+    color: rgb(119, 115, 115);
+  }
+  h3 {
+    font-size: 20px;
+    color: rgb(53, 48, 48);
+  }
+}
+.register-btn {
+  background: transparent;
+  border: 1.8px solid #0670d4c7;
+  color: #0670d4c7;
+  font-size: 20px;
+  border-radius: 5px;
+  font-weight: 500;
+}
+.register-btn:hover {
+  background-color: #0670d4c7;
+  color: white;
+}
+
+.register-image {
+  background-repeat: no-repeat;
+  background-image: url('/assets/images/register-image.jpg');
+  background-size: cover;
+  background-position: center;
+  border-radius: 100%;
+  width: 150%;
+  height: 140%;
+  position: relative;
+  left: 10px;
+  bottom: 140px;
+  overflow: hidden;
+}
+.register-image .btn,
+.register-image .btn:hover {
+  background-color: #399a36;
+  color: white;
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  font-size: 32px;
+}
+.register-image div span {
+  display: block;
+  color: white;
+  font-weight: bold;
+  font-size: 27px;
+}
+.register-image div {
+  position: absolute;
+  top: 43%;
+  left: 29%;
+  text-align: center;
+}
+.register-image::before {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  content: '';
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.text-brown {
+  color: rgb(128, 125, 125);
+}
+.text-blue {
+  color: #77b8e9;
+}
+.error_message {
+  color: red;
+  font-size: 15px;
+}

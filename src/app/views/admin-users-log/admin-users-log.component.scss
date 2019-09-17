@@ -1,0 +1,23 @@
+$text-teal: #8ecde4;
+
+form {
+  max-width: 500px;
+  padding: 2.5em;
+}
+select {
+  border: none;
+}
+button {
+  margin: 0 5px;
+}
+
+.table_col {
+  height: 100vh;
+}
+.table_head {
+  background-color: $text-teal;
+  color: white;
+}
+.btn {
+  background-color: none;
+}

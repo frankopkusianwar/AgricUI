@@ -1,0 +1,64 @@
+<div class="col top-districts">
+  <div class="row px-3">
+    <div class="col-md-6 mt-3 p-0">
+        <div class=" stat-section p-5">
+            <h4>District Statistics</h4>
+            <table class="table table-striped text-center">
+              <thead class="thead-agric text-white">
+                <tr>
+                  <th scope="col">District</th>
+                  <th scope="col">EzyAgric App Downloads</th>
+                  <th scope="col">EzyAgric Web Users</th>
+                  <th scope="col">In-App purchases</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="topPerformingDistricts.data.length > 0; else noTopPerformingData">
+                <tr *ngFor="let topPerformingDistrict of topPerformingDistricts.data">
+                  <td>{{ topPerformingDistrict.name }}</td>
+                  <td>{{ topPerformingDistrict.appDownloads }}</td>
+                  <td>{{ topPerformingDistrict.webUsers }}</td>
+                  <td>{{ topPerformingDistrict.appPurchases }}</td>
+                </tr>
+              </tbody>
+              <ng-template #noTopPerformingData>
+                <tbody>
+                  <tr>
+                    <td colspan="4">
+                      <h5 class="text-center">No top performing district data to display at the moment.</h5>
+                    </td>
+                  </tr>
+                </tbody>
+              </ng-template>
+            </table>
+        </div>
+      </div>
+    <div class="col-md-6 mt-3 p-0 pl-3">
+      <div class="stat-section p-5">
+          <h4>Top performing Master Agents</h4>
+          <table class="table table-striped text-center">
+            <thead class="thead-agric text-white">
+              <tr>
+                <th scope="col">Master Agents</th>
+                <th scope="col">Number of Farmers/Orders</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="topPerformingMasterAgents.data.length > 0; else noDataDiv">
+              <tr *ngFor="let topPerformingMA of topPerformingMasterAgents.data">
+                <td>{{ topPerformingMA.name }}</td>
+                <td class="font-weight-bold">{{ topPerformingMA.farmerCount }} | {{ topPerformingMA.orderCount }}</td>
+              </tr>
+            </tbody>
+            <ng-template #noDataDiv>
+                <tbody>
+                  <tr>
+                    <td colspan="2">
+                      <h5 class="text-center">No master agent data to display at the moment.</h5>
+                    </td>
+                  </tr>
+                </tbody>
+              </ng-template>
+          </table>
+      </div>
+    </div>
+  </div>
+</div>

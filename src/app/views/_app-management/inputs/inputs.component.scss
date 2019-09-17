@@ -1,0 +1,30 @@
+$filter-orange: #f38938;
+$white: #ffff;
+$filter-teal: #218a92;
+$nav-background: #1f4788;
+
+
+.dashboard_background {
+  margin: 0px;
+  padding: 0px;
+}
+.background {
+  background: $nav-background;
+}
+.dash-section {
+  background: $white;
+
+  .filter-orange-bg {
+    background: $filter-orange;
+  }
+  .filter-teal-bg {
+    background: $filter-teal;
+  }
+  .action {
+    width: 30px;
+  }
+  .action i {
+    font-size: 20px;
+  }
+}
+

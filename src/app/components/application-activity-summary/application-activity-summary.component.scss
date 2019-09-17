@@ -1,0 +1,54 @@
+$white: #fff;
+$green: #2a701f;
+$brown: #e9d5d5;
+$blue: #2e46c5;
+$red: #c52e56;
+$light-green: #33c62f;
+.card-section {
+  background-color: $white;
+  border-radius: 5px;
+}
+
+.active-users {
+  color:$green;
+  border-right: 2px solid $brown;
+}
+
+.circle {
+  height: 5rem;
+  width: 5rem;
+  border-radius: 50%;
+  position: relative;
+
+  &-icon__box {
+    position: absolute;
+    top: 0.7rem;
+    left: 0.7rem;
+
+    &-last {
+      position: absolute;
+      top: 0.7rem;
+      left: 1.2rem;
+
+      & i {
+        font-size: 3.5rem;
+      }
+    }
+
+    & i {
+      font-size: 3.5rem;
+    }
+  }
+}
+
+.blue-circle {
+  background-color: $blue;
+}
+
+.red-circle {
+  background-color: $red;
+}
+
+.green-circle {
+  background-color: $light-green;
+}

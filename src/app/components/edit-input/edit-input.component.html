@@ -1,0 +1,97 @@
+<div class="modal-content modal-contents" *ngIf="!submitted">
+  <div class="modal-header change-modal-header">
+    <h5 class="modal-title modal-change-title">
+      Edit Input
+    </h5>
+    <button type="button" class="close" data-dismiss="modal">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form *ngIf="viewInput" (submit)="updateInput(updateInputForm.value, viewInput._id)" #updateInputForm="ngForm"
+      class="px-2 py-2">
+      <div class="form-group">
+        <label for="name">Name of Input</label>
+        <input type="text" class="form-control change-input-field" placeholder="name of input" name="name"
+          #name="ngModel" [(ngModel)]="viewInput.name" required minlength="3" />
+        <div *ngIf="name.touched && !name.valid">
+          <span *ngIf="name.errors.minlength" class="text-danger change-text-danger">name mustn't be under 3
+            characters.</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="crops">Crops</label>
+        <input type="text" class="form-control change-input-field" placeholder="crops" name="crops" #crops="ngModel"
+          [(ngModel)]="viewInput.crops" required />
+      </div>
+      <div class="form-group">
+        <label for="category">Input Category</label>
+        <select class="custom-select custom-select-lg mb-3 change-input-field" placeholder="category" name="category"
+          ngModel #category="ngModel" required>
+          <option *ngFor="let data of categories" [value]="data">
+            {{ data }}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="Description">Description</label>
+        <input type="text" class="form-control change-input-field" placeholder="description" name="description"
+          #description="ngModel" [(ngModel)]="viewInput.description" required minlength="3" />
+        <div *ngIf="description.touched && !description.valid">
+          <span class="text-danger change-text-danger">
+            description mustn't be under 3 characters.
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="image">Image</label>
+        <input type="file" value="CHOOSE FILE" name="photo" class="form-control change-files"
+          (change)="changeImage($event)" accept="image/png, image/jpeg, image/jpg" />
+      </div>
+      <div class="form-group">
+        <label for="price">Unit Price</label>
+        <input type="text" class="form-control change-input-field" placeholder="unit price" name="price"
+          #price="ngModel" [(ngModel)]="viewInput.price" required />
+      </div>
+      <div class="form-group">
+        <label for="unit">Unit</label>
+        <input type="text" class="form-control
+                    change-input-field" placeholder="unit" name="unit" #unit="ngModel" [(ngModel)]="viewInput.unit"
+          required />
+      </div>
+      <div class="form-group">
+        <label for="supplier">Supplier</label>
+        <input type="text" class="form-control
+                    change-input-field" placeholder="supplier" name="supplier" #supplier="ngModel"
+          [(ngModel)]="viewInput.supplier" required minlength="3" />
+        <div *ngIf="supplier.touched && !supplier.valid">
+          <span class="text-danger change-text-danger">
+            supplier mustn't be under 3 characters.
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="quantity">Quantity</label>
+        <input type="text" class="form-control
+                    change-input-field" placeholder="quantity" name="quantity" #quantity="ngModel"
+          [(ngModel)]="viewInput.quantity" required />
+      </div>
+      <div class="d-flex justify-content-center align-item-center form-group">
+        <button type="submit" class="submit-input-btn" [disabled]="!updateInputForm.form.valid">
+          <span *ngIf="loading" class="spinner-border spinner-border-md
+            text-white change-loading" role="status"></span>
+          <span *ngIf="loading" class="mx-2">Loading...</span>
+          <span *ngIf="!loading">
+            Save Info
+          </span>
+        </button>
+      </div>
+    </form>
+    <div class="spinner d-flex" *ngIf="loadingModal">
+      <span class="spinner-border spinner-border-md mx-auto update-loading" role="status"></span>
+    </div>
+  </div>
+  <div *ngIf="errors" class="alert alert-danger">
+    {{ errors }}
+  </div>
+</div>

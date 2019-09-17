@@ -1,0 +1,36 @@
+<app-navigation></app-navigation>
+<div class="report-page-container">
+  <div class="report-page-container__main">
+    <app-report-filter (filterReport)="updateOnFilter($event)"></app-report-filter>
+    <div *ngIf="loaded; else spinnerDiv">
+      <app-application-activity-summary 
+      [activeMobileUsers]="activeMobileUsers"
+      [numberOfVisitors]="numberOfVisitors"
+      >
+      </app-application-activity-summary>
+      <app-admin-social-media-summary
+        [twitterReport]="twitterReport"
+        [facebookReport]="facebookReport"
+        [youtubeReport]="youtubeReport"
+      >
+      </app-admin-social-media-summary>
+      <app-top-districts
+        [topPerformingDistricts]="topPerformingDistricts"
+        [topPerformingMasterAgents]="topPerformingMasterAgents"
+      >
+      </app-top-districts>
+      <app-online-accounts
+        [topPerformingVillageAgents]="topPerformingVillageAgents"
+      ></app-online-accounts>
+      <app-most-ordered-products></app-most-ordered-products>
+    </div>
+    <ng-template #spinnerDiv>
+        <div class="spinner d-flex">
+          <span
+            class="spinner-border spinner-border-md mx-auto"
+            role="status"
+          ></span>
+        </div>
+      </ng-template>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+$color-brown: rgb(63, 63, 62);
+.main {
+  margin: 0px;
+  padding: 0px;
+  min-height: 100vh;
+}
+
+.background-white {
+  background-color: white;
+}
+.district {
+  width: 100%;
+  background-color: transparent !important;
+}
+.error_message {
+  color: red;
+}
+.select-items {
+  background-color: white;
+  color: white;
+}
+.text_bold {
+  font-size: 18px;
+  color: $color-brown;
+}

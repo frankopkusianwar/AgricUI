@@ -1,0 +1,233 @@
+<div class="container-fluid main background-white w-100">
+  <app-navigation></app-navigation>
+  <div class="row background-white admin_page mt-3 w-100">
+    <div class="col-md-8 ">
+      <div class="row">
+        <div class="row table_title mt-2 background-white w-100">
+          <div class="row w-100 p-3 mx-5">
+            <div class="col title">
+              <h3 class="my-4">{{ title }}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col background-white ">
+          <div
+            *ngIf="success"
+            class="alert alert-success alert-dismissible fade show px-5 m-5"
+            role="alert"
+          >
+            <strong>Registration successful!</strong>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div
+            *ngIf="db_errors"
+            class="alert alert-danger alert-dismissible fade show px-5 m-5 error_message "
+            role="alert"
+          >
+            <div class="w-100" *ngFor="let error of db_errors | keyvalue">
+              <span class="error_message w-100">{{ error.value }}</span>
+            </div>
+          </div>
+          <form
+            [formGroup]="adminForm"
+            (ngSubmit)="handleSubmit()"
+            class="px-5 py-2 "
+          >
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <input
+                  type="text"
+                  class="form-control form-control-lg"
+                  id="firstname"
+                  placeholder="Enter First Name"
+                  formControlName="firstname"
+                  pattern="^([a-zA-Z\s\-\(\)]*)$"
+                  (keyup)="clearMessage()"
+                />
+                <div
+                  *ngIf="submitted && adminForm.controls.firstname.errors"
+                  class="error_message"
+                >
+                  <span *ngIf="adminForm.controls.firstname.errors.required">
+                    Please enter your firstname.
+                  </span>
+                  <span *ngIf="adminForm.controls.firstname.errors.pattern">
+                    Please enter a valid name.<br />
+                    Only alphabetic characters are allowed.
+                  </span>
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <input
+                  type="text"
+                  class="form-control form-control-lg"
+                  id="lastname"
+                  placeholder="Enter Last Name"
+                  formControlName="lastname"
+                  pattern="^([a-zA-Z\s\-\(\)]*)$"
+                  (keyup)="clearMessage()"
+                />
+                <div
+                  *ngIf="submitted && adminForm.controls.lastname.errors"
+                  class="error_message"
+                >
+                  <span *ngIf="adminForm.controls.lastname.errors.required">
+                    Please enter your lastname.
+                  </span>
+                  <span *ngIf="adminForm.controls.lastname.errors.pattern">
+                    Please enter a valid name.<br />
+                    Only alphabetic characters are allowed.
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <input
+                type="email"
+                class="form-control form-control-lg"
+                id="email"
+                placeholder="Enter Email"
+                formControlName="email"
+                (keyup)="clearMessage()"
+              />
+              <div
+                *ngIf="submitted && adminForm.controls.email.errors"
+                class="error_message"
+              >
+                <span *ngIf="adminForm.controls.email.errors.required">
+                  Please enter your email address.
+                </span>
+                <span *ngIf="adminForm.controls.email.errors.email">
+                  Email must be a valid email address.
+                </span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <input
+                type="password"
+                class="form-control form-control-lg"
+                id="password"
+                placeholder="Create Password"
+                formControlName="password"
+                (keyup)="clearMessage()"
+              />
+              <div
+                *ngIf="submitted && adminForm.controls.password.errors"
+                class="error_message"
+              >
+                <span *ngIf="adminForm.controls.password.errors.required">
+                  Please enter your password.
+                </span>
+                <span *ngIf="adminForm.controls.password.errors.minlength">
+                  Password must be at least 6 characters.
+                </span>
+              </div>
+            </div>
+            <div class="form-group">
+              <input
+                type="password"
+                class="form-control form-control-lg "
+                id="confirmPassword"
+                placeholder="Confirm Password"
+                formControlName="confirmPassword"
+                (keyup)="clearMessage()"
+              />
+              <div *ngIf="submitted">
+                <span
+                  class="error_message"
+                  *ngIf="!(password.value === confirmedPassword.value)"
+                >
+                  passwordMismatch
+                </span>
+              </div>
+              <div
+                *ngIf="submitted && adminForm.controls.confirmPassword.errors"
+                class="error_message"
+              >
+                <span
+                  *ngIf="adminForm.controls.confirmPassword.errors.required"
+                >
+                  Please confirm password.
+                </span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="adminRole" class="text-bold text-brown"
+                >Select User Role</label
+              >
+
+              <select
+                class="form-control form-control-lg"
+                id="adminRole"
+                formControlName="adminRole"
+                (keyup)="clearMessage()"
+              >
+                <option>Select User Role</option>
+                <option value="Super Admin">Super Admin</option>
+                <option value="Moderate Editor">Moderate Editor</option>
+                <option value="Analyst">Analyst</option>
+              </select>
+              <div
+                *ngIf="submitted && adminForm.controls.adminRole.errors"
+                class="error_message"
+              >
+                <span *ngIf="adminForm.controls.adminRole.errors.required">
+                  Please select an admin role.
+                </span>
+              </div>
+            </div>
+
+            <button class="btn btn-primary btn-lg w-100 mr-3 my-4">
+              <span
+                *ngIf="loading"
+                class="spinner-border spinner-border-md text-white"
+                role="status"
+              ></span>
+              <span *ngIf="loading" class="mx-2">Loading...</span>
+              <span *ngIf="!loading">
+                Create ACCOUNT
+              </span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 adminInfo">
+      <div class="row ">
+        <div class="col mt-5 pt-3 px-4">
+          <div class="row p-3 mt-4">
+            <div>
+              <h4 class="text-green">Super User</h4>
+              <h5 class="text-grey">All functionalities</h5>
+            </div>
+          </div>
+          <div class="row p-3">
+            <div>
+              <h4 class="text-green">Editor</h4>
+              <h5 class="text-grey">
+                Restricted to app management functionalities
+              </h5>
+            </div>
+          </div>
+          <div class="row p-3">
+            <div>
+              <h4 class="text-green">Analyst</h4>
+              <h5 class="text-grey">Restricted to view only</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
